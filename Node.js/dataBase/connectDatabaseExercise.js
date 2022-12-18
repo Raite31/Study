@@ -5,6 +5,7 @@
 
 // 创建http服务
 // var server = http.createServer(function (req, res) {
+// 根据请求路径的不同，进行的响应也不同
 //   if (req.url == '/index?userId=123') {
 //     console.log(req.url);
 //     res.write('index');
