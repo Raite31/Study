@@ -41,4 +41,7 @@ router.get('/genres', genre_controller.genre_list);
 
 /// 藏书副本、藏书种类、作者的路由与藏书路由结构基本一致，只是无需获取主页 ///
 
+
+router.get('/genre/:id', genre_controller.genre_detail);
+
 module.exports = router;
