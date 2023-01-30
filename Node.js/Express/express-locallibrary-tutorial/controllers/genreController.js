@@ -20,6 +20,7 @@ exports.genre_list = function (req, res, next) {
 // Display detail page for a specific Genre.
 exports.genre_detail = function (req, res, next) {
   async.parallel(
+    // 该方法使用async.parallel()，并行查询类型名称及其相关联的书本，并在（如果）两个请求成功完成时，回调呈现页面。
     {
       genre: function (callback) {
         Genre.findById(req.params.id).exec(callback);
