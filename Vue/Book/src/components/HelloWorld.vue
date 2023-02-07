@@ -1,113 +1,70 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
+    <!-- computed======================================== -->
+    <div id="example">
+      <p>Original message: "{{ message }}"</p>
+      <p>Computed reversed message: "{{ reversedMessage }}"</p>
+    </div>
+
+    <!-- watch=============================================== -->
+    <div id="demo">
+      <input type="text" v-model="firstName" />
+      <input type="text" v-model="lastName" />
+      {{ fullName }}
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
-  data () {
+  name: "HelloWorld",
+  data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      message: "Hello",
+
+      firstName: "Foo",
+      lastName: "Bar",
+      fullName: "Foo Bar"
+    };
+  },
+  computed: {
+    reversedMessage: function() {
+      return this.message
+        .split("")
+        .reverse()
+        .join("");
+    },
+    // fullName: function() {
+    //   return this.firstName + " " + this.lastName;
+    // }
+
+    // computed加上setter
+    fullName: {
+      // getter
+      get: function() {
+        return this.firstName + " " + this.lastName;
+      },
+      // setter
+      set: function() {
+        console.log("newValue: ", newValue);
+        var names = newValue.split("");
+        this.firstName = names[0];
+        this.lastName = names[names.length - 1];
+      }
+    }
+  },
+  watch: {
+    firstName: function(val) {
+      this.fullName = val + " " + this.lastName;
+      console.log(this.fullName);
+    },
+    lastName: function(val) {
+      this.fullName = this.firstName + " " + val;
+      console.log(this.fullName);
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
+<style scoped></style>
