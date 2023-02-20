@@ -1,102 +1,72 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
+    <li v-for="n in evenNumbers" :key="n.index">{{ n }}</li>
+    <li v-for="i in items" :key="i.index">{{ i }}</li>
+    <ul v-for="set in sets" :key="set.index">
+      <li v-for="n in even(set)" :key="n.index">{{ n }}</li>
     </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
+
+    <template v-for="item in items">
+      <li>{{ item.message }}</li>
+      <li class="divider" role="presentation"></li>
+    </template>
+
+    <button v-on:click="warn('Form cannot be submitted yet.', $eve)">
+      Submit
+    </button>
   </div>
 </template>
 
 <script>
+import { onMounted, ref } from "vue";
+
 export default {
-  name: 'HelloWorld',
-  data () {
+  name: "HelloWorld",
+  data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: "Welcome to Your Vue.js App",
+      numbers: [1, 2, 3, 4, 5],
+      sets: [
+        [1, 2, 3, 4, 5],
+        [6, 7, 8, 9, 10]
+      ],
+      items: [{ message: "Foo" }, { message: "Bar" }]
+    };
+  },
+  methods: {
+    push() {
+      this.items.push({ message: "Baz" });
+    },
+    even: function(numbers) {
+      return numbers.filter(function(number) {
+        return number % 2 === 0;
+      });
+    },
+    warn: function(message, event) {
+      if (event) {
+        event.preventDefault();
+      }
+      alert(message);
     }
+  },
+  computed: {
+    evenNumbers: function() {
+      return this.numbers.filter(function(number) {
+        return number % 2 === 0;
+      });
+    }
+  },
+  mounted() {
+    this.push();
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 ul {
