@@ -1,20 +1,72 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <li v-for="n in evenNumbers" :key="n.index">{{ n }}</li>
-    <li v-for="i in items" :key="i.index">{{ i }}</li>
-    <ul v-for="set in sets" :key="set.index">
-      <li v-for="n in even(set)" :key="n.index">{{ n }}</li>
-    </ul>
+    <div class="contain">
+      <h1>{{ msg }}</h1>
+      <li v-for="n in evenNumbers" :key="n.index">{{ n }}</li>
+      <li v-for="i in items" :key="i.index">{{ i }}</li>
+      <ul v-for="set in sets" :key="set.index">
+        <li v-for="n in even(set)" :key="n.index">{{ n }}</li>
+      </ul>
+    </div>
 
-    <template v-for="item in items">
-      <li>{{ item.message }}</li>
-      <li class="divider" role="presentation"></li>
-    </template>
+    <div class="contain">
+      <template v-for="item in items">
+        <li>{{ item.message }}</li>
+        <li class="divider" role="presentation"></li>
+      </template>
+    </div>
 
-    <button v-on:click="warn('Form cannot be submitted yet.', $eve)">
-      Submit
-    </button>
+    <div class="contain">
+      <button v-on:click="warn('Form cannot be submitted yet.', $eve)">
+        Submit
+      </button>
+    </div>
+
+    <div class="contain">
+      <div>
+        <span>Multiline message is: </span>
+        <p style="white-space: pre-line;">{{ message }}</p>
+        <br />
+        <textarea v-model="message" placeholder="add multiple lines"></textarea>
+      </div>
+
+      <div>
+        <input type="checkbox" id="checkbox" v-model="checked" />
+        <label for="checkbox">{{ checked }}</label>
+      </div>
+
+      <div>
+        <input type="checkbox" id="jack" value="Jack" v-model="checkedNames" />
+        <label for="jack">Jack</label>
+        <input type="checkbox" id="john" value="John" v-model="checkedNames" />
+        <label for="john">John</label>
+        <input type="checkbox" id="mike" value="Mike" v-model="checkedNames" />
+        <label for="mike">Mike</label>
+        <br />
+        <span>Checked names: {{ checkedNames }}</span>
+      </div>
+
+      <div>
+        <input type="radio" id="one" value="One" v-model="picked" />
+        <label for="one">One</label>
+        <br />
+        <input type="radio" id="two" value="Two" v-model="picked" />
+        <label for="two">Two</label>
+        <br />
+        <span>Picked: {{ picked }}</span>
+      </div>
+
+      <div>
+        <select v-model="selected">
+          <option disabled value="">请选择</option>
+          <option value="s">A</option>
+          <option value="sss">B</option>
+          <option value="C">C</option>
+        </select>
+        <span>Selected: {{ selected }}</span>
+      </div>
+
+    </div>
   </div>
 </template>
 
@@ -25,7 +77,12 @@ export default {
   name: "HelloWorld",
   data() {
     return {
+      selected: "",
+      picked: "",
+      checkedNames: [],
+      checked: "",
       msg: "Welcome to Your Vue.js App",
+      message: "",
       numbers: [1, 2, 3, 4, 5],
       sets: [
         [1, 2, 3, 4, 5],
@@ -65,19 +122,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1,
-h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
+ul,
 li {
-  display: inline-block;
-  margin: 0 10px;
+  list-style: none;
 }
-a {
-  color: #42b983;
+.contain {
+  margin: 20px auto;
 }
 </style>
