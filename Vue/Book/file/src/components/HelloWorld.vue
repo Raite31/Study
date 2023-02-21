@@ -66,12 +66,31 @@
         <span>Selected: {{ selected }}</span>
       </div>
 
+      <div>
+        <input type="text" v-model.lazy="msg" />
+        {{ msg }}
+      </div>
+    </div>
+
+    <div>
+      <button-counter></button-counter>
     </div>
   </div>
 </template>
 
 <script>
 import { onMounted, ref } from "vue";
+
+// Vue.component("button-counter", {
+//   data: function() {
+//     return {
+//       count: 0
+//     };
+//   },
+//   template:
+//     '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+// }),
+//   new Vue({ el: "#components-demo" });
 
 export default {
   name: "HelloWorld",
