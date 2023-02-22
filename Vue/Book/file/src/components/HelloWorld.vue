@@ -79,8 +79,33 @@
 </template>
 
 <script>
-import { onMounted, ref } from "vue";
+Vue.component("base-input", {
+  inheritAttrs: false,
+  props: ["label", "value"],
+  computed: {
+    inputListeners: function() {
+      var vm = this;
+      return Object.assign({}, this.$listenters, {
+        input: function(event) {
+          vm.$emit("input", even.target.value);
+        }
+      });
+    }
+  },
+  template: `
+    <label>
+      {{ label }}
+      <input
+        v-bind="$attrs"
+        v-bind:value="value"
+        v-on="inputListeners"
+      >
+    </label>
+  `
+});
+</script>
 
+<script>
 // Vue.component("button-counter", {
 //   data: function() {
 //     return {
@@ -91,6 +116,10 @@ import { onMounted, ref } from "vue";
 //     '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
 // }),
 //   new Vue({ el: "#components-demo" });
+</script>
+
+<script>
+import { onMounted, ref } from "vue";
 
 export default {
   name: "HelloWorld",
