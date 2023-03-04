@@ -267,3 +267,29 @@ class PersonCl {
     console.log('Hey there 👋');
   }
 }
+
+class StudentCl extends PersonCl {
+  // 这里继承的时候不需要再像以前一样：父类.call(……)，ES6里这会自动完成
+  constructor(fullName, birthYear, course) {
+    // Always needs to happen first
+    super(fullName, birthYear);
+    this.course = course;
+  }
+  introduce() {
+    console.log(`My name is ${this.fullName} and I study ${this.course}`);
+  }
+  calcAge() {
+    console.log(
+      `I'm ${
+        2037 - this.birthYear
+      } years old, but as a student I feel more like ${
+        2037 - this.birthYear + 10
+      }`
+    );
+  }
+}
+
+const martha = new StudentCl('Martha Jones', 2012);
+const hary = new StudentCl('Hary Jones', 2012, 'Computer Science');
+martha.introduce();
+martha.calcAge();
