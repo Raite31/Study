@@ -136,40 +136,134 @@
 // console.log(ford);
 
 // 更真实的继承==================================================
-const Person = function (firstName, birthYear) {
-  this.firstName = firstName;
-  this.birthYear = birthYear;
-};
+// const Person = function (firstName, birthYear) {
+//   this.firstName = firstName;
+//   this.birthYear = birthYear;
+// };
 
-Person.prototype.calcAge = function () {
-  console.log(2037 - this.birthYear);
-};
+// Person.prototype.calcAge = function () {
+//   console.log(2037 - this.birthYear);
+// };
 
-const Student = function (firstName, birthYear, course) {
-  Person.call(this, firstName, birthYear);
-  // 这样使用相当于Person是个常规函数，而在常规函数中，this keyword是 undefined
-  // call方法就能把this的指向修正
-  this.course = course;
-};
+// const Student = function (firstName, birthYear, course) {
+//   Person.call(this, firstName, birthYear);
+//   // 这样使用相当于Person是个常规函数，而在常规函数中，this keyword是 undefined
+//   // call方法就能把this的指向修正
+//   this.course = course;
+// };
 
-// linking prototype
-Student.prototype = Object.create(Person.prototype); // 此时Student.prototype是空值
+// // linking prototype
+// // 学生继承自人类的底层逻辑
+// Student.prototype = Object.create(Person.prototype); // 此时Student.prototype是空值
 
-Student.prototype.introduce = function () {
-  console.log(`My name is ${this.firstName} and I study ${this.course}`);
-};
+// Student.prototype.introduce = function () {
+//   console.log(`My name is ${this.firstName} and I study ${this.course}`);
+// };
 
-const mike = new Student('Mike', 2020, 'Computer Science');
-console.log(mike);
-mike.introduce();
-mike.calcAge();
+// const mike = new Student('Mike', 2020, 'Computer Science');
+// console.log(mike);
+// mike.introduce();
+// mike.calcAge();
 
-console.log(mike.__proto__);
-console.log(mike.__proto__.__proto__);
+// console.log('mike.__proto__: ', mike.__proto__);
+// console.log('mike.__proto__.__proto__: ', mike.__proto__.__proto__);
 
-console.log(mike instanceof Student);
-console.log(mike instanceof Person);
+// console.log(mike instanceof Student);
+// console.log(mike instanceof Person);
 
-console.dir(Student.prototype.constructor);
+// Student.prototype.constructor = Student;
+// console.dir(Student.prototype.constructor);
 
-Student.prototype.constructor = Student;
+// Coding Challenge 3========================================================
+// 1. 实现一个电动汽车类，叫做EV，他是Car类的子类，这个EV类他有品牌和当前速度
+// 2. 给EV实现一个加速的方法和刹车的方法
+// 3. 给EV实现一个加速的方法，能使汽车速度提升20的同时减少1%的费用，还要打印出来
+// 测试数据：Tesla以120公里的速度行驶，收取23的费用，根据这个测试数据创建对象，包括accelerate、brake和chargeBattery方法
+
+// 自己写的
+// const Car = function (make, current_speed, chargeBattery, chargeTO, decrease) {
+//   this.make = make;
+//   this.current_speed = current_speed;
+//   this.chargeBattery = chargeBattery;
+//   this.chargeTO = chargeTO;
+//   this.decrease = decrease;
+// };
+
+// const EV = function (make, current_speed, chargeBattery, chargeTO, decrease) {
+//   Car.call(this, make, current_speed, chargeBattery, chargeTO, decrease);
+//   function accelerate() {
+//     current_speed = current_speed + 20;
+//     decrease = decrease - decrease * 0.01;
+//   }
+// };
+
+// const tesla = new EV('Tesla', 140, 80, 80, 22);
+
+// 老师写的
+// const Car = function (make, speed) {
+//   this.make = make;
+//   this.speed = speed;
+// };
+
+// Car.prototype.accelerate = function () {
+//   this.speed += 10;
+//   console.log(`${this.make} is going at ${this.speed}km/h`);
+// };
+
+// Car.prototype.brake = function () {
+//   this.speed -= 5;
+//   console.log(`${this.make} is going at ${this.speed}km/h`);
+// };
+
+// const EV = function (make, speed, charge) {
+//   Car.call(this, make, speed);
+//   this.charge = charge;
+// };
+
+// // 链接原型
+// EV.prototype = Object.create(Car.prototype);
+// // 新增原型方法
+// EV.prototype.chargeBattery = function (chargeTo) {
+//   this.charge = chargeTo;
+// };
+// // 修改原型方法，因为原本原型就有这个方法，所以在这里是新增给自己的原型方法，原型链会先用这个
+// EV.prototype.accelerate = function () {
+//   this.speed += 20;
+//   this.charge--;
+//   console.log(
+//     `${this.make} is going at ${this.speed}km/h, with a charge of ${this.charge}`
+//   );
+// };
+
+// const tesla = new EV('Tesla', 120, 23);
+// tesla.chargeBattery(90);
+// console.log(tesla);
+// tesla.brake();
+// tesla.accelerate();
+
+// 使用ES6实现上面知识点
+class PersonCl {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+  greet() {
+    console.log(`Hey ${this.fullName}`);
+  }
+  get age() {
+    return 2037 - this.birthYear;
+  }
+  set fullName(name) {
+    if (name.includes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name!`);
+  }
+  get fullName() {
+    return this._fullName;
+  }
+  static hey() {
+    console.log('Hey there 👋');
+  }
+}
