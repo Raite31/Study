@@ -72,7 +72,7 @@
 
 // console.log(account.movements);
 
-// Object.create函数=========================================================
+// =================================================================================Object.create函数
 // const PersonProto = {
 //   calcAge() {
 //     console.log(2037 - this.birthYear);
@@ -96,7 +96,7 @@
 // sarah.init('Sarah', 1979);
 // sarah.calcAge();
 
-// Coding Challenge 2========================================================
+// ==========================================================================Coding Challenge 2
 // 1. 用ES6创建Challenge1
 // 2. 用一个名为'speedUS'的getter返回当前的时速（mi/h），原来的速度是km/h，换算是：英里 = 公里/1.6
 // 3. 用一个名为'speedUS'的setter设置当前速度（把英里转换公里）
@@ -135,7 +135,7 @@
 // ford.speedUS = 50;
 // console.log(ford);
 
-// 更真实的继承==================================================
+// ========================================================================更真实的继承
 // const Person = function (firstName, birthYear) {
 //   this.firstName = firstName;
 //   this.birthYear = birthYear;
@@ -174,7 +174,7 @@
 // Student.prototype.constructor = Student;
 // console.dir(Student.prototype.constructor);
 
-// Coding Challenge 3========================================================
+// ==================================================================Coding Challenge 3
 // 1. 实现一个电动汽车类，叫做EV，他是Car类的子类，这个EV类他有品牌和当前速度
 // 2. 给EV实现一个加速的方法和刹车的方法
 // 3. 给EV实现一个加速的方法，能使汽车速度提升20的同时减少1%的费用，还要打印出来
@@ -241,55 +241,80 @@
 // tesla.brake();
 // tesla.accelerate();
 
-// 使用ES6实现上面知识点
-class PersonCl {
-  constructor(fullName, birthYear) {
-    this.fullName = fullName;
-    this.birthYear = birthYear;
-  }
+// ===========================================================================使用ES6实现继承
+// class PersonCl {
+//   constructor(fullName, birthYear) {
+//     this.fullName = fullName;
+//     this.birthYear = birthYear;
+//   }
+//   calcAge() {
+//     console.log(2037 - this.birthYear);
+//   }
+//   greet() {
+//     console.log(`Hey ${this.fullName}`);
+//   }
+//   get age() {
+//     return 2037 - this.birthYear;
+//   }
+//   set fullName(name) {
+//     if (name.includes(' ')) this._fullName = name;
+//     else alert(`${name} is not a full name!`);
+//   }
+//   get fullName() {
+//     return this._fullName;
+//   }
+//   static hey() {
+//     console.log('Hey there 👋');
+//   }
+// }
+
+// class StudentCl extends PersonCl {
+//   // 这里继承的时候不需要再像以前一样：父类.call(……)，ES6里这会自动完成
+//   constructor(fullName, birthYear, course) {
+//     // Always needs to happen first
+//     super(fullName, birthYear);
+//     this.course = course;
+//   }
+//   introduce() {
+//     console.log(`My name is ${this.fullName} and I study ${this.course}`);
+//   }
+//   calcAge() {
+//     console.log(
+//       `I'm ${
+//         2037 - this.birthYear
+//       } years old, but as a student I feel more like ${
+//         2037 - this.birthYear + 10
+//       }`
+//     );
+//   }
+// }
+
+// const martha = new StudentCl('Martha Jones', 2012);
+// const hary = new StudentCl('Hary Jones', 2012, 'Computer Science');
+// martha.introduce();
+// martha.calcAge();
+// ===========================================================================使用Object.create实现复杂原型链
+const PersonProto = {
   calcAge() {
     console.log(2037 - this.birthYear);
-  }
-  greet() {
-    console.log(`Hey ${this.fullName}`);
-  }
-  get age() {
-    return 2037 - this.birthYear;
-  }
-  set fullName(name) {
-    if (name.includes(' ')) this._fullName = name;
-    else alert(`${name} is not a full name!`);
-  }
-  get fullName() {
-    return this._fullName;
-  }
-  static hey() {
-    console.log('Hey there 👋');
-  }
-}
+  },
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+const steven = Object.create(PersonProto);
 
-class StudentCl extends PersonCl {
-  // 这里继承的时候不需要再像以前一样：父类.call(……)，ES6里这会自动完成
-  constructor(fullName, birthYear, course) {
-    // Always needs to happen first
-    super(fullName, birthYear);
-    this.course = course;
-  }
-  introduce() {
-    console.log(`My name is ${this.fullName} and I study ${this.course}`);
-  }
-  calcAge() {
-    console.log(
-      `I'm ${
-        2037 - this.birthYear
-      } years old, but as a student I feel more like ${
-        2037 - this.birthYear + 10
-      }`
-    );
-  }
-}
+const StudentProto = Object.create(PersonProto);
+StudentProto.init = function (firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+};
+StudentProto.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
 
-const martha = new StudentCl('Martha Jones', 2012);
-const hary = new StudentCl('Hary Jones', 2012, 'Computer Science');
-martha.introduce();
-martha.calcAge();
+const jay = Object.create(StudentProto); // 所以StudentProto是jay的父，PersonProto是jay的爷，jay将会继承StudentProto和PersonProto的所有属性
+jay.init('Jay', 2010, 'Computer Science');
+jay.introduce();
+jay.calcAge();
