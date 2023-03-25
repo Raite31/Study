@@ -271,7 +271,7 @@
 // class StudentCl extends PersonCl {
 //   // 这里继承的时候不需要再像以前一样：父类.call(……)，ES6里这会自动完成
 //   constructor(fullName, birthYear, course) {
-//     // Always needs to happen first
+//     // 在ES6继承中，需要第一时间用super
 //     super(fullName, birthYear);
 //     this.course = course;
 //   }
@@ -294,27 +294,74 @@
 // martha.introduce();
 // martha.calcAge();
 // ===========================================================================使用Object.create实现复杂原型链
-const PersonProto = {
-  calcAge() {
-    console.log(2037 - this.birthYear);
-  },
-  init(firstName, birthYear) {
-    this.firstName = firstName;
-    this.birthYear = birthYear;
-  },
-};
-const steven = Object.create(PersonProto);
+// const PersonProto = {
+//   calcAge() {
+//     console.log(2037 - this.birthYear);
+//   },
+//   init(firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//   },
+// };
+// // 继承PersonProto
+// const steven = Object.create(PersonProto);
 
-const StudentProto = Object.create(PersonProto);
-StudentProto.init = function (firstName, birthYear, course) {
-  PersonProto.init.call(this, firstName, birthYear);
-  this.course = course;
-};
-StudentProto.introduce = function () {
-  console.log(`My name is ${this.firstName} and I study ${this.course}`);
-};
+// const StudentProto = Object.create(PersonProto);
+// StudentProto.init = function (firstName, birthYear, course) {
+//   PersonProto.init.call(this, firstName, birthYear);
+//   //  StudentProto自己的变量
+//   this.course = course;
+// };
+// //  StudentProto自己的变量
+// StudentProto.introduce = function () {
+//   console.log(`My name is ${this.firstName} and I study ${this.course}`);
+// };
 
-const jay = Object.create(StudentProto); // 所以StudentProto是jay的父，PersonProto是jay的爷，jay将会继承StudentProto和PersonProto的所有属性
-jay.init('Jay', 2010, 'Computer Science');
-jay.introduce();
-jay.calcAge();
+// const jay = Object.create(StudentProto); // 所以StudentProto是jay的父，PersonProto是jay的爷，jay将会继承StudentProto和PersonProto的所有属性
+// jay.init('Jay', 2010, 'Computer Science');
+// jay.introduce();
+// jay.calcAge();
+
+// ===========================================================================其它class的例子，主要是说数据封装 隐私问题
+class Account {
+  constructor(owner, currnecy, pin) {
+    this.owner = owner;
+    this.currnecy = currnecy;
+    this.pin = pin;
+    this.movements = [];
+    this.locale = navigator.language;
+
+    console.log(`Thanks for opening an account, ${this.owner}`);
+  }
+  // 对象接口函数 API
+  deposit(val) {
+    this.movements.push(val);
+  }
+  withdraw(val) {
+    this.movements.push(-val);
+  }
+  approveLoan(val) {
+    return true;
+  }
+  requestLoan(val) {
+    if (this.approveLoan(val)) {
+      this.deposit(val);
+      console.log(`Loan approved`);
+    }
+  }
+}
+
+const acc1 = new Account('Jonas', 'EUR', 111);
+console.log(acc1);
+
+// 这不是一个好方法，应该创建方法
+// acc1.movements.push(250);
+// acc1.movements.push(-140);
+
+acc1.deposit(250);
+acc1.withdraw(140);
+acc1.requestLoan(1000);
+acc1.approveLoan(2000); //可以看到这是个内部方法 无法被使用，只能在类的内部使用
+
+console.log(acc1);
+console.log(acc1.pin);
