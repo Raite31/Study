@@ -323,31 +323,73 @@
 // jay.calcAge();
 
 // ===========================================================================其它class的例子，主要是说数据封装 隐私问题
+// 面向对象编程（他有封装和数据隐私的意味）
+// JS一般是假封装
+
+// 真正私有的类字段和方法
+// Public fields
+// Private fields
+// Public methods
+// Private methods
+// 还有相同的 static 版本的四种方法，所以合共八种
+
 class Account {
+  // Public fields
+  // 1. 不需要const、let等声明
+  // 2. 需要分号结尾
+  // 他是通过类构造的，他们不在原型上（很重要）
+  // 也可以通过this引用
+  locale = navigator.language;
+  _movements = [];
+
+  // Private fields
+  // 1. 用#开头
+  // 也是通过类构造的，不在原型上
+  #movements = []; // 此时控制台会报错
+  #pin; //相当于定义了一个空变量
+
   constructor(owner, currnecy, pin) {
     this.owner = owner;
     this.currnecy = currnecy;
-    this.pin = pin;
-    this.movements = [];
+    this.#pin = pin; // 对私有变量进行赋值
+    this._movements = []; //添加下划线的做法是行内规矩，说明他是一个“被保护”的变量
     this.locale = navigator.language;
 
     console.log(`Thanks for opening an account, ${this.owner}`);
   }
+
+  // Public methods
+  // “被保护”的变量就得通过公共方法来访问
+  getMovements() {
+    // return this._movements;
+    return this.#movements; // 这样访问私有变量才不会报错
+  }
+
   // 对象接口函数 API
   deposit(val) {
-    this.movements.push(val);
+    // this._movements.push(val);
+    this.#movements.push(val); // 这样访问私有变量才不会报错
   }
   withdraw(val) {
-    this.movements.push(-val);
+    // this.movements.push(-val);
+    this.deposit(-val);
   }
-  approveLoan(val) {
-    return true;
-  }
+
   requestLoan(val) {
-    if (this.approveLoan(val)) {
+    if (this.#approveLoan(val)) {
       this.deposit(val);
       console.log(`Loan approved`);
     }
+  }
+
+  static helper() {
+    // static变量不能用在所有实例上，只能用在类本身上
+    console.log();
+  }
+
+  // Private methods
+  #approveLoan(val) {
+    return true;
   }
 }
 
@@ -361,7 +403,13 @@ console.log(acc1);
 acc1.deposit(250);
 acc1.withdraw(140);
 acc1.requestLoan(1000);
-acc1.approveLoan(2000); //可以看到这是个内部方法 无法被使用，只能在类的内部使用
+// acc1._approveLoan(2000); //可以看到这是个内部方法 无法被使用，只能在类的内部使用
+// acc1.#approveLoan(2000); // 原本是使用下划线的，改成这个之后由于现代JS还未支持，所以直接报错
+console.log(acc1.getMovements());
 
 console.log(acc1);
 console.log(acc1.pin);
+
+// console.log(acc1.#movements); //直接报错
+
+Account.helper();
