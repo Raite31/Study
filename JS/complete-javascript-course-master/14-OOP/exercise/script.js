@@ -369,10 +369,12 @@ class Account {
   deposit(val) {
     // this._movements.push(val);
     this.#movements.push(val); // 这样访问私有变量才不会报错
+    return this;
   }
   withdraw(val) {
     // this.movements.push(-val);
     this.deposit(-val);
+    return this;
   }
 
   requestLoan(val) {
@@ -380,6 +382,7 @@ class Account {
       this.deposit(val);
       console.log(`Loan approved`);
     }
+    return this;
   }
 
   static helper() {
@@ -413,3 +416,8 @@ console.log(acc1.pin);
 // console.log(acc1.#movements); //直接报错
 
 Account.helper();
+
+// 链式
+acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
+// 需要这些函数都设置了" return this;"才可链化
+console.log(acc1.getMovements());
