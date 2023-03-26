@@ -333,91 +333,189 @@
 // Private methods
 // 还有相同的 static 版本的四种方法，所以合共八种
 
-class Account {
-  // Public fields
-  // 1. 不需要const、let等声明
-  // 2. 需要分号结尾
-  // 他是通过类构造的，他们不在原型上（很重要）
-  // 也可以通过this引用
-  locale = navigator.language;
-  _movements = [];
+// class Account {
+//   // Public fields
+//   // 1. 不需要const、let等声明
+//   // 2. 需要分号结尾
+//   // 他是通过类构造的，他们不在原型上（很重要）
+//   // 也可以通过this引用
+//   locale = navigator.language;
+//   _movements = [];
 
-  // Private fields
-  // 1. 用#开头
-  // 也是通过类构造的，不在原型上
-  #movements = []; // 此时控制台会报错
-  #pin; //相当于定义了一个空变量
+//   // Private fields
+//   // 1. 用#开头
+//   // 也是通过类构造的，不在原型上
+//   #movements = []; // 此时控制台会报错
+//   #pin; //相当于定义了一个空变量
 
-  constructor(owner, currnecy, pin) {
-    this.owner = owner;
-    this.currnecy = currnecy;
-    this.#pin = pin; // 对私有变量进行赋值
-    this._movements = []; //添加下划线的做法是行内规矩，说明他是一个“被保护”的变量
-    this.locale = navigator.language;
+//   constructor(owner, currnecy, pin) {
+//     this.owner = owner;
+//     this.currnecy = currnecy;
+//     this.#pin = pin; // 对私有变量进行赋值
+//     this._movements = []; //添加下划线的做法是行内规矩，说明他是一个“被保护”的变量
+//     this.locale = navigator.language;
 
-    console.log(`Thanks for opening an account, ${this.owner}`);
+//     console.log(`Thanks for opening an account, ${this.owner}`);
+//   }
+
+//   // Public methods
+//   // “被保护”的变量就得通过公共方法来访问
+//   getMovements() {
+//     // return this._movements;
+//     return this.#movements; // 这样访问私有变量才不会报错
+//   }
+
+//   // 对象接口函数 API
+//   deposit(val) {
+//     // this._movements.push(val);
+//     this.#movements.push(val); // 这样访问私有变量才不会报错
+//     return this;
+//   }
+//   withdraw(val) {
+//     // this.movements.push(-val);
+//     this.deposit(-val);
+//     return this;
+//   }
+
+//   requestLoan(val) {
+//     if (this.#approveLoan(val)) {
+//       this.deposit(val);
+//       console.log(`Loan approved`);
+//     }
+//     return this;
+//   }
+
+//   static helper() {
+//     // static变量不能用在所有实例上，只能用在类本身上
+//     console.log();
+//   }
+
+//   // Private methods
+//   #approveLoan(val) {
+//     return true;
+//   }
+// }
+
+// const acc1 = new Account('Jonas', 'EUR', 111);
+// console.log(acc1);
+
+// // 这不是一个好方法，应该创建方法
+// // acc1.movements.push(250);
+// // acc1.movements.push(-140);
+
+// acc1.deposit(250);
+// acc1.withdraw(140);
+// acc1.requestLoan(1000);
+// // acc1._approveLoan(2000); //可以看到这是个内部方法 无法被使用，只能在类的内部使用
+// // acc1.#approveLoan(2000); // 原本是使用下划线的，改成这个之后由于现代JS还未支持，所以直接报错
+// console.log(acc1.getMovements());
+
+// console.log(acc1);
+// console.log(acc1.pin);
+
+// // console.log(acc1.#movements); //直接报错
+
+// Account.helper();
+
+// // 链式
+// acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
+// // 需要这些函数都设置了" return this;"才可链化
+// console.log(acc1.getMovements());
+
+// ===========================================================================Code Challenge 4
+// 使用ES6重新创造challenge3
+//  创建一个EV类，它是Car类的子类
+//  EV类有个充电属性，是私有属性
+//  实现私有的链接加速和充电电池方法，刹车方法也是如此
+
+// 测试数据： 'Rivian' 以120km/h的速度行驶，并且是23的电
+
+// 自己写的
+// class Car {
+//   make;
+//   speed;
+//   constructor(make, speed) {
+//     this.make = make;
+//     this.speed = speed;
+//   }
+//   accelerate() {
+//     this.speed += 10;
+//     console.log(`${this.make} is going at ${this.speed}km/h`);
+//   }
+//   brake() {
+//     this.speed -= 5;
+//     console.log(`${this.make} is going at ${this.speed}km/h`);
+//   }
+// }
+
+// const EV = new Car('Tesla', 120, 23);
+
+// EV.chargeBattery = function (chargeTo) {
+//   this.charge = chargeTo;
+// };
+// EV.accelerate = function () {
+//   this.speed += 20;
+//   this.charge--;
+//   console.log(
+//     `${this.make} is going at ${this.speed}km/h, with charge ${this.charge}`
+//   );
+// };
+
+// console.log('EV: ', EV);
+// EV.accelerate();
+// EV.brake();
+// EV.accelerate();
+
+// 老师写的
+class CarCl {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
   }
 
-  // Public methods
-  // “被保护”的变量就得通过公共方法来访问
-  getMovements() {
-    // return this._movements;
-    return this.#movements; // 这样访问私有变量才不会报错
-  }
-
-  // 对象接口函数 API
-  deposit(val) {
-    // this._movements.push(val);
-    this.#movements.push(val); // 这样访问私有变量才不会报错
+  accelerate() {
+    this.speed += 10;
+    console.log(`${this.make} is going at ${this.speed}km/h`);
     return this;
   }
-  withdraw(val) {
-    // this.movements.push(-val);
-    this.deposit(-val);
+
+  brake() {
+    this.speed -= 5;
+    console.log(`${this.make} is going at ${this.speed}km/h`);
     return this;
-  }
-
-  requestLoan(val) {
-    if (this.#approveLoan(val)) {
-      this.deposit(val);
-      console.log(`Loan approved`);
-    }
-    return this;
-  }
-
-  static helper() {
-    // static变量不能用在所有实例上，只能用在类本身上
-    console.log();
-  }
-
-  // Private methods
-  #approveLoan(val) {
-    return true;
   }
 }
 
-const acc1 = new Account('Jonas', 'EUR', 111);
-console.log(acc1);
+class EVCl extends CarCl {
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.charge = charge;
+  }
 
-// 这不是一个好方法，应该创建方法
-// acc1.movements.push(250);
-// acc1.movements.push(-140);
+  // 新增原型方法
+  chargeBattery(chargeTo) {
+    this.charge = chargeTo;
+    return this;
+  }
+  // 修改原型方法，因为原本原型就有这个方法，所以在这里是新增给自己的原型方法，原型链会先用这个
+  accelerate() {
+    this.speed += 20;
+    this.#charge--;
+    console.log(
+      `${this.make} is going at ${this.speed}km/h, with a charge of ${this.charge}`
+    );
+    return this;
+  }
+}
 
-acc1.deposit(250);
-acc1.withdraw(140);
-acc1.requestLoan(1000);
-// acc1._approveLoan(2000); //可以看到这是个内部方法 无法被使用，只能在类的内部使用
-// acc1.#approveLoan(2000); // 原本是使用下划线的，改成这个之后由于现代JS还未支持，所以直接报错
-console.log(acc1.getMovements());
-
-console.log(acc1);
-console.log(acc1.pin);
-
-// console.log(acc1.#movements); //直接报错
-
-Account.helper();
-
-// 链式
-acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
-// 需要这些函数都设置了" return this;"才可链化
-console.log(acc1.getMovements());
+const rivian = new EVCl('Rivian', 120, 23);
+// console.log(rivian);
+// console.log(rivian.#charge); //行不通的
+rivian
+  .accelerate()
+  .accelerate()
+  .accelerate()
+  .accelerate()
+  .brake()
+  .chargeBattery(50)
+  .accelerate();
