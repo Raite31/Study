@@ -467,55 +467,56 @@
 // EV.accelerate();
 
 // 老师写的
-class CarCl {
-  constructor(make, speed) {
-    this.make = make;
-    this.speed = speed;
-  }
+// class CarCl {
+//   constructor(make, speed) {
+//     this.make = make;
+//     this.speed = speed;
+//   }
 
-  accelerate() {
-    this.speed += 10;
-    console.log(`${this.make} is going at ${this.speed}km/h`);
-    return this;
-  }
+//   accelerate() {
+//     this.speed += 10;
+//     console.log(`${this.make} is going at ${this.speed}km/h`);
+//     return this;
+//   }
 
-  brake() {
-    this.speed -= 5;
-    console.log(`${this.make} is going at ${this.speed}km/h`);
-    return this;
-  }
-}
+//   brake() {
+//     this.speed -= 5;
+//     console.log(`${this.make} is going at ${this.speed}km/h`);
+//     return this;
+//   }
+// }
 
-class EVCl extends CarCl {
-  constructor(make, speed, charge) {
-    super(make, speed);
-    this.charge = charge;
-  }
+// class EVCl extends CarCl {
+//   constructor(make, speed, charge) {
+//     super(make, speed);
+//     this.charge = charge;
+//   }
 
-  // 新增原型方法
-  chargeBattery(chargeTo) {
-    this.charge = chargeTo;
-    return this;
-  }
-  // 修改原型方法，因为原本原型就有这个方法，所以在这里是新增给自己的原型方法，原型链会先用这个
-  accelerate() {
-    this.speed += 20;
-    this.#charge--;
-    console.log(
-      `${this.make} is going at ${this.speed}km/h, with a charge of ${this.charge}`
-    );
-    return this;
-  }
-}
+//   // 新增原型方法
+//   chargeBattery(chargeTo) {
+//     this.charge = chargeTo;
+//     return this;
+//   }
+//   // 修改原型方法，因为原本原型就有这个方法，所以在这里是新增给自己的原型方法，原型链会先用这个
+//   accelerate() {
+//     this.speed += 20;
+//     this.#charge--;
+//     console.log(
+//       `${this.make} is going at ${this.speed}km/h, with a charge of ${this.charge}`
+//     );
+//     return this;
+//   }
+// }
 
-const rivian = new EVCl('Rivian', 120, 23);
-// console.log(rivian);
-// console.log(rivian.#charge); //行不通的
-rivian
-  .accelerate()
-  .accelerate()
-  .accelerate()
-  .accelerate()
-  .brake()
-  .chargeBattery(50)
-  .accelerate();
+// const rivian = new EVCl('Rivian', 120, 23);
+// // console.log(rivian);
+// // console.log(rivian.#charge); //行不通的
+// rivian
+//   .accelerate()
+//   .accelerate()
+//   .accelerate()
+//   .accelerate()
+//   .brake()
+//   .chargeBattery(50)
+//   .accelerate();
+
