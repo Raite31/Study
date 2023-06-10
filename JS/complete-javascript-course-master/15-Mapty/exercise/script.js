@@ -13,51 +13,60 @@ const inputElevation = document.querySelector('.form__input--elevation');
 
 let map, mapEvent;
 
-// 确保这个浏览器方法存在
-if (navigator.geolocation)
-  navigator.geolocation.getCurrentPosition(
-    function (position) {
-      // 成功时候的回调
-      console.log(position);
-      // 获取经纬度
-      const { latitude } = position.coords;
-      const { longitude } = position.coords;
-      console.log(
-        `https://www.google.com/maps/@${latitude},${longitude},4z?entry=ttu`
+class App {
+  #map; // 私有实例
+  #mapEvent;
+  constructor() {
+    this._getPosition();
+  }
+  _getPosition() {
+    // 确保这个浏览器方法存在
+    if (navigator.geolocation)
+      navigator.geolocation.getCurrentPosition(
+        this._loadMap.bind(this),
+        function () {
+          // 失败时候的回调
+          alter('Could not get current position');
+        }
       );
-      console.log(`https://map.baidu.com/@${latitude},${longitude},13z`);
+  }
+  _loadMap(position) {
+    // 成功时候的回调
+    console.log(position);
+    // 获取经纬度
+    const { latitude } = position.coords;
+    const { longitude } = position.coords;
+    console.log(
+      `https://www.google.com/maps/@${latitude},${longitude},4z?entry=ttu`
+    );
+    console.log(`https://map.baidu.com/@${latitude},${longitude},13z`);
 
-      // leaflet的基本使用
-      // L 是leaflet的入口
-      // 这里的'map'是html里map id的元素，要把它set到map id的标签中
+    // leaflet的基本使用
+    // L 是leaflet的入口
+    // 这里的'map'是html里map id的元素，要把它set到map id的标签中
 
-      const coords = [latitude, longitude];
-      map = L.map('map').setView(coords, 13);
+    const coords = [latitude, longitude];
+    this.#map = L.map('map').setView(coords, 13);
 
-      // 配置用什么地图打开
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      }).addTo(map);
+    // 配置用什么地图打开
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(this.#map);
 
-      // 配置锚点
-      L.marker(coords)
-        .addTo(map)
-        .bindPopup('A pretty CSS popup.<br> Easily customizable.')
-        .openPopup();
+    // 地图点击事件
+    this.#map.on('click', function (mapE) {
+      this.#mapEvent = mapE;
+      form.classList.remove('hidden');
+      inputDistance.focus();
+    });
+  }
+  _showForm() {}
+  _toggleElevationField() {}
+  _newWorkout() {}
+}
 
-      // 地图点击事件
-      map.on('click', function (mapE) {
-        mapEvent = mapE;
-        form.classList.remove('hidden');
-        inputDistance.focus();
-      });
-    },
-    function () {
-      // 失败时候的回调
-      alter('Could not get current position');
-    }
-  );
+const app = new App();
 
 form.addEventListener('submit', function (e) {
   e.preventDefault();
