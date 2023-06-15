@@ -60,6 +60,7 @@ const inputElevation = document.querySelector('.form__input--elevation');
 class App {
   #map; // 私有实例
   #mapEvent;
+  #workout = [];
   constructor() {
     this._getPosition();
     form.addEventListener('submit', this._newWorkout.bind(this));
@@ -125,6 +126,8 @@ class App {
     const type = inputType.value;
     const distance = inputDistance.value;
     const duration = inputDuration.value;
+    const { lat, lng } = this.#mapEvent.latlng;
+    let workout;
     // 数据校验
     // 若是跑步，创建对象
     if (type === 'running') {
@@ -135,6 +138,8 @@ class App {
         !allPositive(distance, duration, cadence)
       )
         return alert('Inputs have to be positive numbers');
+
+      workout = new Running([lat, lng], distance, duration, cadence);
     }
     // 若是骑自行车，创建对象
     if (type === 'cycling') {
@@ -144,11 +149,14 @@ class App {
         !allPositive(distance, duration)
       )
         return alert('Inputs have to be positive numbers');
+
+      workout = new Cycling([lat, lng], distance, duration, elevation);
     }
     // 把新建的对象放到workout数组中
+    this.#workout.push(workout);
+    console.log(this.#workout);
 
     // 在地图中渲染workout数组中的每一项
-    const { lat, lng } = this.#mapEvent.latlng;
     L.marker({ lat, lng })
       .addTo(this.#map)
       .bindPopup(
