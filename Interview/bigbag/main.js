@@ -60,12 +60,12 @@ for (var i = 0; i < numImages; i++) {
 	var z = imageRadius * Math.cos(angle);
 	image.position.set(x, y, z);
 
-	// 计算图片朝向中心点的角度
 	var lookAtAngle = Math.atan2(
 		center.z - image.position.z,
 		center.x - image.position.x
 	);
 	image.rotation.y = -lookAtAngle - Math.PI / 2; // 右侧朝向中心点
+	image.rotation.z = -Math.PI / 4; // 图片倾45度
 
 	imageRotation.add(image);
 }
