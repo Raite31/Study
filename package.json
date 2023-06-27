@@ -2,6 +2,8 @@
   "dependencies": {
     "animejs": "^3.2.1",
     "three": "^0.153.0",
+    "three-orbitcontrols": "^2.110.3",
+    "tween.js": "^16.6.0",
     "vue": "^3.2.47",
     "webpack": "^5.85.1"
   },
