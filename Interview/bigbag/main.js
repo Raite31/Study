@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import * as THREE from 'https://unpkg.com/three@0.126.1/build/three.module.js';
 
 // 设置场景、相机、渲染器
 const scene = new THREE.Scene();
