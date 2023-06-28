@@ -18,17 +18,31 @@ body {
 			}
 		}
 	}
+	.animas {
+		width: 100%;
+		#cylinder {
+			margin: 0 auto;
+			canvas {
+				width: 100% !important;
+			}
+		}
+	}
+
 	.footer {
 		height: 40px;
 		background-color: #ffffff;
 		display: flex;
+		justify-content: space-between;
 		align-items: center;
 		flex: 1;
-		.footer-item {
-			margin-right: 20px;
-			.a-item {
-				text-decoration: none;
-				color: black;
+		.footer-contain {
+			display: flex;
+			.footer-item {
+				margin-right: 20px;
+				.a-item {
+					text-decoration: none;
+					color: black;
+				}
 			}
 		}
 	}

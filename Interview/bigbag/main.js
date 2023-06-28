@@ -13,6 +13,11 @@ var camera = new THREE.PerspectiveCamera(
 );
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, 820);
+// 监听窗口大小的变化
+window.addEventListener('resize', function () {
+	// 更新渲染器的大小
+	renderer.setSize(window.innerWidth, 820);
+});
 document.getElementById('cylinder').appendChild(renderer.domElement);
 
 // 设置圆柱体模型
@@ -41,9 +46,8 @@ var cylinderGeometry2 = new THREE.CylinderGeometry(
 );
 var cylinderMaterial2 = new THREE.MeshBasicMaterial({
 	color: 0xffffff, // 白色
-	opacity: 0.8, // 不透明度
+	opacity: 0.4, // 不透明度
 	transparent: true, // 开启透明度
-	emissive: 0xffffff, // 发光颜色
 	side: THREE.DoubleSide, // 双面渲染
 	blending: THREE.AdditiveBlending, // 加法混合
 	depthWrite: false, // 禁止写入深度缓冲区
@@ -153,6 +157,7 @@ scene.add(light);
 camera.position.z = 70;
 var mouseDown = false;
 var mouseX = 0;
+var mouseY = 0;
 var targetX = 0;
 var targetY = 0;
 var autoRotateSpeed = 0.001;
@@ -172,7 +177,7 @@ var dragSpeed = 0.01; // 拖拽速度
 var dragTween = null;
 var startX = 0; // 保存鼠标按下时的X坐标
 // 鼠标动作监控
-document.addEventListener(
+document.getElementById('cylinder').addEventListener(
 	'mousedown',
 	function (event) {
 		mouseDown = true;
@@ -185,7 +190,7 @@ document.addEventListener(
 	},
 	false
 );
-document.addEventListener(
+document.getElementById('cylinder').addEventListener(
 	'mousemove',
 	function (event) {
 		if (mouseDown) {
@@ -195,7 +200,7 @@ document.addEventListener(
 	},
 	false
 );
-document.addEventListener(
+document.getElementById('cylinder').addEventListener(
 	'mouseup',
 	function (event) {
 		mouseDown = false;
@@ -216,7 +221,7 @@ document.addEventListener(
 	false
 );
 
-document.addEventListener(
+document.getElementById('cylinder').addEventListener(
 	'wheel',
 	function (event) {
 		var delta = event.deltaY;
