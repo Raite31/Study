@@ -47,11 +47,51 @@ var cylinder2 = new THREE.Mesh(cylinderGeometry2, cylinderMaterial2);
 scene.add(cylinder2);
 
 // 设置图片
-var imageTexture = new THREE.TextureLoader().load('path/to/your/image.jpg');
-var imageMaterial = new THREE.MeshBasicMaterial({
-	map: imageTexture,
-	side: THREE.DoubleSide,
-});
+var imagePaths = [
+	'image/image1.jpg',
+	'image/image2.jpg',
+	'image/image3.jpg',
+	'image/image4.jpg',
+	'image/image5.jpg',
+	'image/image6.jpg',
+	'image/image7.jpg',
+	'image/image8.jpg',
+	'image/image9.gif',
+	'image/image1.jpg',
+	'image/image2.jpg',
+	'image/image3.jpg',
+	'image/image4.jpg',
+	'image/image5.jpg',
+	'image/image6.jpg',
+	'image/image7.jpg',
+	'image/image8.jpg',
+	'image/image9.gif',
+	'image/image1.jpg',
+	'image/image2.jpg',
+	'image/image3.jpg',
+	'image/image4.jpg',
+	'image/image5.jpg',
+	'image/image6.jpg',
+	'image/image7.jpg',
+	'image/image8.jpg',
+	'image/image9.gif',
+	'image/image1.jpg',
+	'image/image2.jpg',
+	'image/image3.jpg',
+
+	// 添加更多的图片路径...
+];
+
+var imageMaterials = [];
+for (var i = 0; i < imagePaths.length; i++) {
+	var imageTexture = new THREE.TextureLoader().load(imagePaths[i]);
+	var imageMaterial = new THREE.MeshBasicMaterial({
+		map: imageTexture,
+		side: THREE.DoubleSide,
+	});
+	imageMaterials.push(imageMaterial);
+}
+
 var imageWidth = 10;
 var imageMargin = 1;
 var imageRadius = (numImages * (imageWidth + imageMargin)) / (2 * Math.PI);
@@ -60,9 +100,18 @@ var imageRotation = new THREE.Object3D();
 var center = new THREE.Vector3(0, 0, 0);
 
 for (var i = 0; i < numImages; i++) {
-	var image = new THREE.Mesh(new THREE.PlaneGeometry(10, 15), imageMaterial);
-	var image2 = new THREE.Mesh(new THREE.PlaneGeometry(10, 15), imageMaterial);
-	var image3 = new THREE.Mesh(new THREE.PlaneGeometry(10, 15), imageMaterial);
+	var image = new THREE.Mesh(
+		new THREE.PlaneGeometry(10, 15),
+		imageMaterials[i]
+	);
+	var image2 = new THREE.Mesh(
+		new THREE.PlaneGeometry(10, 15),
+		imageMaterials[i]
+	);
+	var image3 = new THREE.Mesh(
+		new THREE.PlaneGeometry(10, 15),
+		imageMaterials[i]
+	);
 
 	var angle = i * imageAngle;
 
@@ -71,8 +120,8 @@ for (var i = 0; i < numImages; i++) {
 	var z = imageRadius * Math.cos(angle);
 
 	image.position.set(x, y, z);
-	image2.position.set(x, y+30, z);
-	image3.position.set(x, y-30, z);
+	image2.position.set(x, y + 20, z);
+	image3.position.set(x, y - 20, z);
 
 	var lookAtAngle = Math.atan2(
 		center.z - image.position.z,
@@ -117,6 +166,7 @@ animate();
 // 鼠标动作监控
 var dragSpeed = 0.01; // 拖拽速度
 var dragTween = null;
+var startX = 0; // 保存鼠标按下时的X坐标
 // 鼠标动作监控
 document.addEventListener(
 	'mousedown',
@@ -126,6 +176,7 @@ document.addEventListener(
 		mouseY = event.clientY;
 		targetX = imageRotation.rotation.y;
 		targetY = imageRotation.rotation.x;
+		startX = event.clientX; // 记录鼠标按下时的X坐标
 		if (dragTween) dragTween.stop(); // 停止之前的Tween动画
 	},
 	false
@@ -135,10 +186,9 @@ document.addEventListener(
 	function (event) {
 		if (mouseDown) {
 			var deltaX = event.clientX - mouseX;
-			var deltaY = event.clientY - mouseY;
 			imageRotation.rotation.y = targetX + deltaX * dragSpeed;
-			imageRotation.rotation.x = targetY + deltaY * dragSpeed;
 		}
+		console.log('ggg:', event);
 	},
 	false
 );
@@ -147,9 +197,19 @@ document.addEventListener(
 	function (event) {
 		mouseDown = false;
 		// 创建Tween动画，使图片平滑过渡到目标角度
+		var endX = event.clientX; // 获取鼠标释放时的X坐标
+		var distance = endX - startX; // 计算滑动距离
 		if (dragTween) dragTween.stop(); // 停止之前的Tween动画
+		console.log('e:', imageRotation.rotation.y);
+		console.log('f:', targetX);
+		console.log('h: ', event);
+		if (distance > 0) {
+			targetX = imageRotation.rotation.y + 1;
+		} else {
+			targetX = imageRotation.rotation.y - 1;
+		}
 		dragTween = new TWEEN.Tween(imageRotation.rotation)
-			.to({ y: targetX, x: targetY }, 500)
+			.to({ y: targetX, x: targetY }, 1200)
 			.easing(TWEEN.Easing.Quadratic.Out)
 			.start();
 	},
