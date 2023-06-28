@@ -1,0 +1,35 @@
+body {
+	overflow: hidden;
+	margin: 20px 20px 0 20px;
+	.header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		.header_right {
+			display: flex;
+			#audio {
+				margin-right: 20px;
+				#audio-on {
+					display: block;
+				}
+				#audio-off {
+					display: none;
+				}
+			}
+		}
+	}
+	.footer {
+		height: 40px;
+		background-color: #ffffff;
+		display: flex;
+		align-items: center;
+		flex: 1;
+		.footer-item {
+			margin-right: 20px;
+			.a-item {
+				text-decoration: none;
+				color: black;
+			}
+		}
+	}
+}

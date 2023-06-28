@@ -12,12 +12,12 @@ var camera = new THREE.PerspectiveCamera(
 	1000
 );
 var renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+renderer.setSize(window.innerWidth, 820);
+document.getElementById('cylinder').appendChild(renderer.domElement);
 
 // 设置圆柱体模型
-var cylinderRadius = 40;
-var cylinderHeight = 50;
+var cylinderRadius = 30;
+var cylinderHeight = 100;
 var numImages = 30;
 var cylinderGeometry = new THREE.CylinderGeometry(
 	cylinderRadius,
@@ -32,6 +32,7 @@ var cylinderMaterial = new THREE.MeshBasicMaterial({
 });
 var cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
 scene.add(cylinder);
+
 var cylinderGeometry2 = new THREE.CylinderGeometry(
 	cylinderRadius,
 	cylinderRadius,
@@ -39,45 +40,49 @@ var cylinderGeometry2 = new THREE.CylinderGeometry(
 	32
 );
 var cylinderMaterial2 = new THREE.MeshBasicMaterial({
-	color: 0x111111,
-	transparent: true,
-	opacity: 0.5,
+	color: 0xffffff, // 白色
+	opacity: 0.8, // 不透明度
+	transparent: true, // 开启透明度
+	emissive: 0xffffff, // 发光颜色
+	side: THREE.DoubleSide, // 双面渲染
+	blending: THREE.AdditiveBlending, // 加法混合
+	depthWrite: false, // 禁止写入深度缓冲区
 });
 var cylinder2 = new THREE.Mesh(cylinderGeometry2, cylinderMaterial2);
 scene.add(cylinder2);
 
 // 设置图片
 var imagePaths = [
-	'image/image1.jpg',
-	'image/image2.jpg',
-	'image/image3.jpg',
-	'image/image4.jpg',
-	'image/image5.jpg',
-	'image/image6.jpg',
-	'image/image7.jpg',
-	'image/image8.jpg',
-	'image/image9.gif',
-	'image/image1.jpg',
-	'image/image2.jpg',
-	'image/image3.jpg',
-	'image/image4.jpg',
-	'image/image5.jpg',
-	'image/image6.jpg',
-	'image/image7.jpg',
-	'image/image8.jpg',
-	'image/image9.gif',
-	'image/image1.jpg',
-	'image/image2.jpg',
-	'image/image3.jpg',
-	'image/image4.jpg',
-	'image/image5.jpg',
-	'image/image6.jpg',
-	'image/image7.jpg',
-	'image/image8.jpg',
-	'image/image9.gif',
-	'image/image1.jpg',
-	'image/image2.jpg',
-	'image/image3.jpg',
+	'image/image1.png',
+	'image/image2.png',
+	'image/image3.png',
+	'image/image4.png',
+	'image/image5.png',
+	'image/image6.png',
+	'image/image1.png',
+	'image/image2.png',
+	'image/image3.png',
+	'image/image4.png',
+	'image/image5.png',
+	'image/image6.png',
+	'image/image1.png',
+	'image/image2.png',
+	'image/image3.png',
+	'image/image4.png',
+	'image/image5.png',
+	'image/image6.png',
+	'image/image1.png',
+	'image/image2.png',
+	'image/image3.png',
+	'image/image4.png',
+	'image/image5.png',
+	'image/image6.png',
+	'image/image1.png',
+	'image/image2.png',
+	'image/image3.png',
+	'image/image4.png',
+	'image/image5.png',
+	'image/image6.png',
 
 	// 添加更多的图片路径...
 ];
@@ -93,7 +98,8 @@ for (var i = 0; i < imagePaths.length; i++) {
 }
 
 var imageWidth = 10;
-var imageMargin = 1;
+var imageLe = 10;
+var imageMargin = 1.3;
 var imageRadius = (numImages * (imageWidth + imageMargin)) / (2 * Math.PI);
 var imageAngle = (imageWidth + imageMargin) / imageRadius;
 var imageRotation = new THREE.Object3D();
@@ -147,11 +153,9 @@ scene.add(light);
 camera.position.z = 70;
 var mouseDown = false;
 var mouseX = 0;
-var mouseY = 0;
 var targetX = 0;
 var targetY = 0;
 var autoRotateSpeed = 0.001;
-var zoomSpeed = 0.1;
 
 function animate() {
 	requestAnimationFrame(animate);
@@ -188,7 +192,6 @@ document.addEventListener(
 			var deltaX = event.clientX - mouseX;
 			imageRotation.rotation.y = targetX + deltaX * dragSpeed;
 		}
-		console.log('ggg:', event);
 	},
 	false
 );
@@ -200,9 +203,6 @@ document.addEventListener(
 		var endX = event.clientX; // 获取鼠标释放时的X坐标
 		var distance = endX - startX; // 计算滑动距离
 		if (dragTween) dragTween.stop(); // 停止之前的Tween动画
-		console.log('e:', imageRotation.rotation.y);
-		console.log('f:', targetX);
-		console.log('h: ', event);
 		if (distance > 0) {
 			targetX = imageRotation.rotation.y + 1;
 		} else {
@@ -215,6 +215,7 @@ document.addEventListener(
 	},
 	false
 );
+
 document.addEventListener(
 	'wheel',
 	function (event) {
@@ -224,3 +225,19 @@ document.addEventListener(
 	},
 	false
 );
+
+// 非动画部分逻辑
+var img = document.getElementById('audio-on');
+var img2 = document.getElementById('audio-off');
+
+img.addEventListener('click', function () {
+	// 在这里编写点击事件的处理逻辑
+	img.style.display = 'none';
+	img2.style.display = 'block';
+});
+
+img2.addEventListener('click', function () {
+	// 在这里编写点击事件的处理逻辑
+	img.style.display = 'block';
+	img2.style.display = 'none';
+});
