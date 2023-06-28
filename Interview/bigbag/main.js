@@ -2,7 +2,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.126.1/build/three.m
 import TWEEN from 'https://cdn.jsdelivr.net/npm/@tweenjs/tween.js@18.5.0/dist/tween.esm.js';
 import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.126.1/examples/jsm/controls/OrbitControls.js';
 
-// 场景 相机 渲染器
+// 场景 相机 渲染器 ======================================
 var scene = new THREE.Scene();
 scene.background = new THREE.Color(0xffffff);
 var camera = new THREE.PerspectiveCamera(
@@ -20,7 +20,7 @@ window.addEventListener('resize', function () {
 });
 document.getElementById('cylinder').appendChild(renderer.domElement);
 
-// 设置圆柱体模型
+// 设置圆柱体模型 ======================================
 var cylinderRadius = 30;
 var cylinderHeight = 100;
 var numImages = 30;
@@ -55,7 +55,7 @@ var cylinderMaterial2 = new THREE.MeshBasicMaterial({
 var cylinder2 = new THREE.Mesh(cylinderGeometry2, cylinderMaterial2);
 scene.add(cylinder2);
 
-// 设置图片
+// 设置图片  ======================================
 var imagePaths = [
 	'image/image1.png',
 	'image/image2.png',
@@ -90,7 +90,6 @@ var imagePaths = [
 
 	// 添加更多的图片路径...
 ];
-
 var imageMaterials = [];
 for (var i = 0; i < imagePaths.length; i++) {
 	var imageTexture = new THREE.TextureLoader().load(imagePaths[i]);
@@ -100,15 +99,12 @@ for (var i = 0; i < imagePaths.length; i++) {
 	});
 	imageMaterials.push(imageMaterial);
 }
-
 var imageWidth = 10;
-var imageLe = 10;
 var imageMargin = 1.3;
 var imageRadius = (numImages * (imageWidth + imageMargin)) / (2 * Math.PI);
 var imageAngle = (imageWidth + imageMargin) / imageRadius;
 var imageRotation = new THREE.Object3D();
 var center = new THREE.Vector3(0, 0, 0);
-
 for (var i = 0; i < numImages; i++) {
 	var image = new THREE.Mesh(
 		new THREE.PlaneGeometry(10, 15),
@@ -150,7 +146,7 @@ for (var i = 0; i < numImages; i++) {
 }
 scene.add(imageRotation);
 
-// 设置灯光
+// 设置灯光 ======================================
 var light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(1, 1, 1);
 scene.add(light);
@@ -162,6 +158,7 @@ var targetX = 0;
 var targetY = 0;
 var autoRotateSpeed = 0.001;
 
+// 运行动画 ======================================
 function animate() {
 	requestAnimationFrame(animate);
 	TWEEN.update(); // 更新Tween动画
@@ -172,11 +169,10 @@ function animate() {
 }
 animate();
 
-// 鼠标动作监控
+// 鼠标动作监控  ======================================
 var dragSpeed = 0.01; // 拖拽速度
 var dragTween = null;
 var startX = 0; // 保存鼠标按下时的X坐标
-// 鼠标动作监控
 document.getElementById('cylinder').addEventListener(
 	'mousedown',
 	function (event) {
@@ -220,7 +216,6 @@ document.getElementById('cylinder').addEventListener(
 	},
 	false
 );
-
 document.getElementById('cylinder').addEventListener(
 	'wheel',
 	function (event) {
@@ -231,7 +226,7 @@ document.getElementById('cylinder').addEventListener(
 	false
 );
 
-// 非动画部分逻辑
+// 非动画部分逻辑 ======================================
 var img = document.getElementById('audio-on');
 var img2 = document.getElementById('audio-off');
 
