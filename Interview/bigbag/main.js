@@ -16,9 +16,9 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 // 设置圆柱体模型
-var cylinderRadius = 20;
+var cylinderRadius = 40;
 var cylinderHeight = 50;
-var numImages = 10;
+var numImages = 30;
 var cylinderGeometry = new THREE.CylinderGeometry(
 	cylinderRadius,
 	cylinderRadius,
@@ -53,22 +53,26 @@ var imageMaterial = new THREE.MeshBasicMaterial({
 	side: THREE.DoubleSide,
 });
 var imageWidth = 10;
-var imageMargin = 2;
+var imageMargin = 1;
 var imageRadius = (numImages * (imageWidth + imageMargin)) / (2 * Math.PI);
 var imageAngle = (imageWidth + imageMargin) / imageRadius;
 var imageRotation = new THREE.Object3D();
 var center = new THREE.Vector3(0, 0, 0);
+
 for (var i = 0; i < numImages; i++) {
 	var image = new THREE.Mesh(new THREE.PlaneGeometry(10, 15), imageMaterial);
 	var image2 = new THREE.Mesh(new THREE.PlaneGeometry(10, 15), imageMaterial);
 	var image3 = new THREE.Mesh(new THREE.PlaneGeometry(10, 15), imageMaterial);
+
 	var angle = i * imageAngle;
+
 	var x = imageRadius * Math.sin(angle);
 	var y = (i % 2 === 0 ? 1 : -1) * (imageWidth / 2);
 	var z = imageRadius * Math.cos(angle);
+
 	image.position.set(x, y, z);
-	image2.position.set(x, 30, z);
-	image3.position.set(x, -30, z);
+	image2.position.set(x, y+30, z);
+	image3.position.set(x, y-30, z);
 
 	var lookAtAngle = Math.atan2(
 		center.z - image.position.z,
@@ -97,10 +101,12 @@ var mouseX = 0;
 var mouseY = 0;
 var targetX = 0;
 var targetY = 0;
-var autoRotateSpeed = 0.01;
+var autoRotateSpeed = 0.001;
 var zoomSpeed = 0.1;
+
 function animate() {
 	requestAnimationFrame(animate);
+	TWEEN.update(); // 更新Tween动画
 	if (!mouseDown) {
 		imageRotation.rotation.y += autoRotateSpeed;
 	}
@@ -108,6 +114,9 @@ function animate() {
 }
 animate();
 
+// 鼠标动作监控
+var dragSpeed = 0.01; // 拖拽速度
+var dragTween = null;
 // 鼠标动作监控
 document.addEventListener(
 	'mousedown',
@@ -117,6 +126,7 @@ document.addEventListener(
 		mouseY = event.clientY;
 		targetX = imageRotation.rotation.y;
 		targetY = imageRotation.rotation.x;
+		if (dragTween) dragTween.stop(); // 停止之前的Tween动画
 	},
 	false
 );
@@ -126,8 +136,8 @@ document.addEventListener(
 		if (mouseDown) {
 			var deltaX = event.clientX - mouseX;
 			var deltaY = event.clientY - mouseY;
-			imageRotation.rotation.y = targetX + deltaX * 0.01;
-			imageRotation.rotation.x = targetY + deltaY * 0.01;
+			imageRotation.rotation.y = targetX + deltaX * dragSpeed;
+			imageRotation.rotation.x = targetY + deltaY * dragSpeed;
 		}
 	},
 	false
@@ -136,6 +146,12 @@ document.addEventListener(
 	'mouseup',
 	function (event) {
 		mouseDown = false;
+		// 创建Tween动画，使图片平滑过渡到目标角度
+		if (dragTween) dragTween.stop(); // 停止之前的Tween动画
+		dragTween = new TWEEN.Tween(imageRotation.rotation)
+			.to({ y: targetX, x: targetY }, 500)
+			.easing(TWEEN.Easing.Quadratic.Out)
+			.start();
 	},
 	false
 );
