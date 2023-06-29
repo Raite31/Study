@@ -1,17 +1,40 @@
 import types
 
 
-class Cat:
-    def __init__(self, name, age, gender):
+class Animals:
+    def __init__(self, foot_num):
+        self.foot_num = foot_num
+
+    def call(self):
+        print("我会嗷嗷叫~")
+
+
+class Dogs(Animals):
+    def __init__(self, foot_num):
+        super().__init__(foot_num)
+
+    def call(self):
+        print("汪汪~~~~~~~")
+
+
+my_dog = Dogs(4)
+my_dog.call()
+
+print('\n')
+
+
+class Cats(Animals):
+    def __init__(self, foot_num, name, age, gender):
+        super().__init__(foot_num)
         self.name = name
         self.age = age
         self.gender = gender
 
     def introduce(self):
         print(
-            f"大家好，我的名字叫{self.name}，今年{self.age}岁，我是{self.gender}生。")
+            f"大家好，我的名字叫{self.name}，今年{self.age}岁，我是{self.gender}生。我有{self.foot_num}条腿")
 
-    def meow(self):
+    def call(self):
         print("喵喵~~~~~~~~")
 
     def run(self):
@@ -22,10 +45,10 @@ class Cat:
 
 
 # 创建一个小猫对象，它叫小花
-my_cat = Cat("小花", 3, '男')
+my_cat = Cats(4, "小花", 3, '男')
 # 调用小猫对象的方法
 my_cat.introduce()
-my_cat.meow()
+my_cat.call()
 my_cat.run()
 my_cat.eat("牛肉")
 
@@ -47,9 +70,9 @@ my_cat.jump()
 print('\n')
 
 # 再创建一个小猫对象，它叫小黑
-your_cat = Cat("小黑", 3, '女')
+your_cat = Cats(4, "小黑", 3, '女')
 # 调用小猫对象的方法
 your_cat.introduce()
-your_cat.meow()
+your_cat.call()
 your_cat.run()
 your_cat.eat("鸡肉冻干")
