@@ -1,4 +1,7 @@
 import types
+import sys
+sys.path.append('..')
+from Canvas.canvas import drawDog
 
 
 class Animals:
@@ -55,8 +58,9 @@ my_cat.eat("牛肉")
 my_cat.color = "我的颜色是橘黄色"
 print(my_cat.color)
 
-my_cat.color = "我的颜色是白色"
-print(my_cat.color)
+my_cat.color = "yellow"
+# print(my_cat.color)
+drawDog(my_cat.color)
 
 
 def jump(self):

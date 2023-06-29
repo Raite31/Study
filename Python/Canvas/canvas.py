@@ -1,14 +1,18 @@
 from turtle import *
+
 screensize(500, 500)
 
 
-def drawDog():
+def drawDog(input_color):
     # 【头部轮廓】
     pensize(5)
     home()
+    # seth：用于设置海龟（turtle）的朝向或角度
     seth(0)
+    # 表示“画笔落下”的意思
     pd()
     color('black')
+    # 用于绘制一个圆弧
     circle(20, 80)  # 0
     circle(200, 30)  # 1
     circle(30, 60)  # 2
@@ -20,6 +24,7 @@ def drawDog():
     circle(50, 70)  # 7
 
     # 确定鼻头大概位置
+    # xcor()用于获取海龟（turtle）当前位置的x坐标值
     x_nose = xcor()
     y_nose = ycor()
     circle(30, 62)  # 8
@@ -27,9 +32,11 @@ def drawDog():
 
     # 【鼻子】
     pu()
+    # 用于将海龟（turtle）移动到指定的位置
     goto(x_nose, y_nose+25)
     seth(90)
     pd()
+    # 用于开始填充图形的颜色。
     begin_fill()
     circle(8)
     end_fill()
@@ -63,10 +70,11 @@ def drawDog():
 
     # 【身体】
     pu()
-    color('black')
+    color(input_color)
     goto(x_nose+90, y_nose-30)
     seth(-130)
     pd()
+    begin_fill()
     circle(250, 28)  # 1
     circle(10, 140)  # 2
     circle(-250, 25)  # 3
@@ -75,8 +83,10 @@ def drawDog():
     circle(8, 145)  # 6
     circle(90, 45)  # 7
     circle(550, 5)  # 8
+    end_fill()
 
     # 【尾巴】
+    color('black')
     seth(0)
     circle(60, 85)  # 1
     circle(40, 65)  # 2
@@ -90,7 +100,10 @@ def drawDog():
 
     # 【背部】
     rt(80)
+    color(input_color)
+    begin_fill()
     circle(200, 35)
+    end_fill()
 
     # 【项圈】
     pensize(20)
@@ -101,7 +114,7 @@ def drawDog():
     # 【前小腿】
     pensize(5)
     pu()
-    color('black')
+    color(input_color)
     goto(x_nose+100, y_nose-125)
     pd()
     seth(-50)
@@ -120,6 +133,3 @@ def drawDog():
     fd(2)
     hideturtle()
     done()
-
-
-drawDog()
