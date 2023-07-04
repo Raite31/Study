@@ -28,7 +28,7 @@ audio {
 	/* border: 1px solid #fff; */
 	line-height: 30px;
 	/* 过渡加载li标签中是因为这样可以让他出现的时候有过渡，消失的时候也有过渡 */
-	transition: 0.2s;
+	transition: 0.6s;
 }
 .container li.active {
 	color: #fff;
