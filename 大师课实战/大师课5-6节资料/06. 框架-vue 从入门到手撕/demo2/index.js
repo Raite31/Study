@@ -31,6 +31,8 @@ function showAge() {
   }
   document.querySelector('#age').textContent = '年龄：' + age;
 }
+
+// 自动调依赖该属性的函数，实际就是getter setter
 autorun(showFirstName);
 autorun(showLastName);
 autorun(showAge);
