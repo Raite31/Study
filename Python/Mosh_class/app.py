@@ -111,3 +111,45 @@ import math
 '''<, <=, >, >='''
 
 # ===========================================重量转换器程序
+# Weight = input('你多重？')
+# Unit = input('公斤还是斤？ ')
+
+# if Unit == '公斤':
+#     print(f'你的体重换算成斤就是 {int(Weight)*2}')
+# else:
+#     print(f'你的体重换算成公斤就是 {int(Weight)/2}')
+
+# ===========================================while循环
+# i = 1
+# while i <= 5:
+#     print('*' * i)
+#     i += 1
+# print('Done')
+
+# ===========================================Car Game
+# while True:
+#     comman = input('> ').lower()
+#     if (comman == 'help'):
+#         print('''
+# start - to start the car
+# stop - to stop the car
+# quit - to exit
+#               ''')
+#     elif (comman == 'start'):
+#         print('Car started...Ready to go!')
+#     elif (comman == 'stop'):
+#         print('Car stopped...')
+#     elif (comman == 'quit'):
+#         break
+#     else:
+#         print('Sorry , I don\'t understand')
+
+#  ===========================================for循环
+# for item in 'Python':
+#     print(item)
+
+# for item in range(10):
+#     print(item)
+
+for item in range(10, 20, 2):
+    print(item, end=" ")
