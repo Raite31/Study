@@ -68,7 +68,7 @@ import math
 # x = 10 + 3**2
 # print(x)
 
-# 数学函数
+# ===========================================数学函数
 # x = 2.9
 # print(round(x))
 # print(abs(-2.9))
@@ -76,3 +76,38 @@ import math
 # print(math.ceil(2.9))
 # print(math.floor(2.9))
 
+# ===========================================if语句
+# is_hot = False
+# is_cold = True
+
+# if is_hot:
+#     print('hot')
+#     print("Dring some water")
+# elif is_cold:
+#     print("Cold")
+# else:
+#     print('Enjoy your day')
+# print('Enjoy your day')
+
+# ===========================================买房游戏
+# price = 1000000
+# has_good_credit = True
+
+# if has_good_credit:
+#     down_payment = price * 0.1
+# else:
+#     down_payment = price * 0.2
+# print(f"Down payment: ${down_payment}")
+
+# ===========================================逻辑运算符
+'''and/ or/ not/'''
+# has_high_incom = True
+# has_good_credit = True
+
+# if has_high_incom and has_good_credit:
+#     print("Eligible for loan")
+
+# ===========================================比较运算符
+'''<, <=, >, >='''
+
+# ===========================================重量转换器程序
