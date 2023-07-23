@@ -151,5 +151,56 @@ import math
 # for item in range(10):
 #     print(item)
 
-for item in range(10, 20, 2):
-    print(item, end=" ")
+# for item in range(10, 20, 2):
+#     print(item, end=" ")
+
+# for x in range(4):
+#     for y in range(3):
+#         print(f'({x}, {y})', end=" ")
+
+# numbers = [5, 2, 5, 2, 2]
+# for item in numbers:
+#     print(item * 'X')
+
+# ===========================================列表
+# names = ['John', 'Mosh', 'Jennifrt', 'Mary']
+# print(names[2])
+
+# ===========================================找最大数
+# numbers = [5, 2, 5, 2, 2]
+# # print(max(numbers))
+# max = numbers[0]
+# for i in numbers:
+#     if (i > max):x
+#         max = i
+# print(max)
+
+# ===========================================二维列表
+# matrix = [
+#     [1, 2, 3],
+#     [4, 5, 6],
+#     [7, 8, 9]
+# ]
+# for row in matrix:
+#     for item in row:
+#         print(item, end=" ")
+
+# ===========================================列表方法 insert/ remove/ append/ pop/ clear/ index/ in/ count/ sort/ reverse/ copy
+# numbers = [5, 2, 5, 2, 2]
+# numbers.insert(0, 10)
+# print(numbers)
+
+
+# ===========================================删除重复列
+# numbers = [5, 2, 5, 2, 2, 2, 3, 65, 25, 234,
+#            234, 354, 6, 5, 4, 4, 3, 3, 2, 4, 2]
+# uniques = []
+# numbers.sort()
+# print(numbers)
+# for i in numbers:
+#     if (i not in uniques):
+#         uniques.append(i)
+# print(uniques)
+
+# ===========================================元组，不可修改不可删
+numbers = (5, 2, 5, 2, 2)
