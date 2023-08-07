@@ -1,9 +1,0 @@
-(function(){
-    var moduleList = [
-        function(require,module,exports){
-            /* template */
-        }
-    ];
-    var module = {exports: {}};
-    moduleList[0]{null,module}
-})
