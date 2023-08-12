@@ -12,9 +12,12 @@
   "license": "ISC",
   "devDependencies": {
     "css-loader": "^6.8.1",
+    "json5": "^2.2.3",
     "style-loader": "^3.3.3",
+    "toml": "^3.0.0",
     "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "yamljs": "^0.3.0"
   },
   "dependencies": {
     "csv-loader": "^3.0.5",

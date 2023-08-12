@@ -167,7 +167,7 @@ eval("module.exports = {\"note\":{\"to\":[\"Mary\"],\"form\":[\"John\"],\"headin
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodash.js\");\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _miaowa_jpeg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./miaowa.jpeg */ \"./src/miaowa.jpeg\");\n/* harmony import */ var _data_xml__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./data.xml */ \"./src/data.xml\");\n/* harmony import */ var _data_xml__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_data_xml__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var _data_csv__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./data.csv */ \"./src/data.csv\");\n/* harmony import */ var _data_csv__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_data_csv__WEBPACK_IMPORTED_MODULE_4__);\n\n\n\n\n\n\nfunction component() {\n\tconst element = document.createElement('div');\n\n\t// lodash（目前通过一个script引入）对于执行这一行是必需的\n\t// lodash在当前script中使用import引入\n\t// 看不懂：https://www.webpackjs.com/guides/getting-started/#creating-a-bundle\n\telement.innerHTML = lodash__WEBPACK_IMPORTED_MODULE_0___default().join(['Hello', 'webpack'], ' ');\n\telement.classList.add('hello');\n\n\tconst myIcon = new Image();\n\tmyIcon.src = _miaowa_jpeg__WEBPACK_IMPORTED_MODULE_2__;\n\n\telement.appendChild(myIcon);\n\n\tconsole.log((_data_xml__WEBPACK_IMPORTED_MODULE_3___default()))\n\tconsole.log((_data_csv__WEBPACK_IMPORTED_MODULE_4___default()));\n\n\treturn element;\n}\n\ndocument.body.appendChild(component());\n\n\n//# sourceURL=webpack://webpack-demo/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodash.js\");\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _miaowa_jpeg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./miaowa.jpeg */ \"./src/miaowa.jpeg\");\n/* harmony import */ var _data_xml__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./data.xml */ \"./src/data.xml\");\n/* harmony import */ var _data_xml__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_data_xml__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var _data_csv__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./data.csv */ \"./src/data.csv\");\n/* harmony import */ var _data_csv__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_data_csv__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var _data_toml__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./data.toml */ \"./src/data.toml\");\n/* harmony import */ var _data_yaml__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./data.yaml */ \"./src/data.yaml\");\n/* harmony import */ var _data_json5__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./data.json5 */ \"./src/data.json5\");\n\n\n\n\n\n\n\n\n\nconsole.log(_data_toml__WEBPACK_IMPORTED_MODULE_5__.title);\nconsole.log(_data_toml__WEBPACK_IMPORTED_MODULE_5__.owner.name);\n\nconsole.log(_data_yaml__WEBPACK_IMPORTED_MODULE_6__.title);\nconsole.log(_data_yaml__WEBPACK_IMPORTED_MODULE_6__.owner.name);\n\nconsole.log(_data_json5__WEBPACK_IMPORTED_MODULE_7__.title);\nconsole.log(_data_json5__WEBPACK_IMPORTED_MODULE_7__.owner.name);\n\nfunction component() {\n\tconst element = document.createElement('div');\n\n\t// lodash（目前通过一个script引入）对于执行这一行是必需的\n\t// lodash在当前script中使用import引入\n\t// 看不懂：https://www.webpackjs.com/guides/getting-started/#creating-a-bundle\n\telement.innerHTML = lodash__WEBPACK_IMPORTED_MODULE_0___default().join(['Hello', 'webpack'], ' ');\n\telement.classList.add('hello');\n\n\tconst myIcon = new Image();\n\tmyIcon.src = _miaowa_jpeg__WEBPACK_IMPORTED_MODULE_2__;\n\n\telement.appendChild(myIcon);\n\n\tconsole.log((_data_xml__WEBPACK_IMPORTED_MODULE_3___default()))\n\tconsole.log((_data_csv__WEBPACK_IMPORTED_MODULE_4___default()));\n\n\treturn element;\n}\n\ndocument.body.appendChild(component());\n\n\n//# sourceURL=webpack://webpack-demo/./src/index.js?");
 
 /***/ }),
 
@@ -190,6 +190,39 @@ eval("module.exports = __webpack_require__.p + \"3c657d07d8ab1e9838c2.ttf\";\n\n
 
 "use strict";
 eval("module.exports = __webpack_require__.p + \"79ca27c0189c3b2394fb.jpeg\";\n\n//# sourceURL=webpack://webpack-demo/./src/miaowa.jpeg?");
+
+/***/ }),
+
+/***/ "./src/data.json5":
+/*!************************!*\
+  !*** ./src/data.json5 ***!
+  \************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = JSON.parse('{\"title\":\"JSON5 Example\",\"owner\":{\"name\":\"Tom Preston-Werner\",\"organization\":\"Github\",\"bio\":\"Github Cofounder & CEO\\\\n        Likes tater tots and beer.\",\"dob\":\"1979-05-27T07:32:00:000Z\"}}');\n\n//# sourceURL=webpack://webpack-demo/./src/data.json5?");
+
+/***/ }),
+
+/***/ "./src/data.toml":
+/*!***********************!*\
+  !*** ./src/data.toml ***!
+  \***********************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = JSON.parse('{\"title\":\"TOML Example\",\"owner\":{\"name\":\"Tom Preston-Werner\",\"organization\":\"Github\",\"bio\":\"Github Confounder & CEO\\\\nLikes tater tots and beer\",\"dob\":\"1979-05-27T07:32:00.000Z\"}}');\n\n//# sourceURL=webpack://webpack-demo/./src/data.toml?");
+
+/***/ }),
+
+/***/ "./src/data.yaml":
+/*!***********************!*\
+  !*** ./src/data.yaml ***!
+  \***********************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = JSON.parse('{\"title\":\"YAML Example\",\"owner\":{\"name\":\"Tom Preston-Werner\",\"organization\":\"Github\",\"bio\":\"Github Confounder & CEO\\\\nLikes tater tots and beer\",\"dob\":\"1979-05-27T07:32:00.000Z\"}}');\n\n//# sourceURL=webpack://webpack-demo/./src/data.yaml?");
 
 /***/ })
 
