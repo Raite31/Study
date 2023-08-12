@@ -1,8 +1,12 @@
 @font-face {
-    font-family
+	font-family: 'MyFont';
+	src: url('./Tillana-Bold.ttf') format('ttf');
+	font-weight: 600;
+	font-style: normal;
 }
 
 .hello {
 	color: red;
+	font-family: 'MyFont';
 	background: url('./miaowa.jpeg');
 }
