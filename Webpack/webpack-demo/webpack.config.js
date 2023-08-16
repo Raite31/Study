@@ -45,6 +45,9 @@ module.exports = {
 	},
 	// 因为在这个示例中单个 HTML 页面有多个入口，所以添加了下面这个
 	optimization: {
-		runtimeChunk: 'single',
+		// runtimeChunk: 'single',
+		splitChunks: {
+			chunks: 'all'
+		}
 	},
 };
