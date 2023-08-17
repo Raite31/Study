@@ -13,12 +13,12 @@ module.exports = {
 		// 在多个chunk之间共享模块，防止重复
 		index: {
 			import: './src/index.js',
-			dependOn: 'shared',
+			// dependOn: 'shared',
 		},
-		another: {
-			import: './src/another-module.js',
-			dependOn: 'shared',
-		},
+		// another: {
+		// 	import: './src/another-module.js',
+		// 	dependOn: 'shared',
+		// },
 		shared: 'lodash',
 	},
 	
@@ -44,12 +44,12 @@ module.exports = {
 		publicPath: '/',
 	},
 	// 因为在这个示例中单个 HTML 页面有多个入口，所以添加了下面这个
-	optimization: {
-		// runtimeChunk: 'single',
+	// optimization: {
+	// 	// runtimeChunk: 'single',
 
-		// SplitChunksPlugin 插件可以将公共的依赖模块提取到已有的入口 chunk 中，或者提取到一个新生成的 chunk
-		splitChunks: {
-			chunks: 'all'
-		}
-	},
+	// 	// SplitChunksPlugin 插件可以将公共的依赖模块提取到已有的入口 chunk 中，或者提取到一个新生成的 chunk
+	// 	// splitChunks: {
+	// 	// 	chunks: 'all'
+	// 	// }
+	// },
 };
