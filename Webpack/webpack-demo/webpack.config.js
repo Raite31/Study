@@ -21,7 +21,6 @@ module.exports = {
 		// },
 		shared: 'lodash',
 	},
-	
 
 	devtool: 'inline-source-map',
 	// 告知 dev server，从什么位置查找文件
@@ -32,24 +31,32 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			// title: '管理输出',
-			title: 'Development',
+			// title: 'Development',
+			title: 'Caching',
 		}),
 	],
 	output: {
 		// filename: 'main.js',
 		// filename: 'bundle.js',
-		filename: '[name].bundle.js',
+		// filename: '[name].bundle.js',
+		filename: '[name].[contenthash].js',
 		path: path.resolve(__dirname, 'dist'),
 		clean: true,
 		publicPath: '/',
 	},
 	// 因为在这个示例中单个 HTML 页面有多个入口，所以添加了下面这个
-	// optimization: {
-	// 	// runtimeChunk: 'single',
+	optimization: {
+		runtimeChunk: 'single',
 
-	// 	// SplitChunksPlugin 插件可以将公共的依赖模块提取到已有的入口 chunk 中，或者提取到一个新生成的 chunk
-	// 	// splitChunks: {
-	// 	// 	chunks: 'all'
-	// 	// }
-	// },
+		// SplitChunksPlugin 插件可以将公共的依赖模块提取到已有的入口 chunk 中，或者提取到一个新生成的 chunk
+		splitChunks: {
+			cacheGroups: {
+				vendor: {
+					test: /[\\/]node_modules[\\/]/,
+					name: 'vendors',
+					chunks: 'all',
+				},
+			},
+		},
+	},
 };
