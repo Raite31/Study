@@ -36,11 +36,12 @@ class Compiler {
 			}),
 			{}
 		);
+		this.generate(dependencyGraph);
 	}
 
 	build(filename) {
 		const { getAst, getDependecies, getCode } = Parser;
-		const ast = Parser.getAst(this.entry);
+		const ast = getAst(this.entry);
 		const dependencies = getDependecies(ast, this.entry);
 		const code = getCode(ast);
 		return {
@@ -53,8 +54,26 @@ class Compiler {
 		};
 	}
 
-	// 重写require函数，输出bundle
-	generate() {}
+	// 6. 重写require函数，输出bundle
+	generate(code) {
+		// 输出文件路径
+		const filePath = path.join(this.output.path, this.output.filename);
+		const bundle = `(function(graph){
+			function require(module){
+				function localRequire(relativePath){
+					return require(graph[module].dependecies[relativePath]);
+				}
+				var exports = {}
+				(function(require,exports,code){
+					eval(code)
+				})(localRequire,exports,graph[module].code)
+				return exports
+			}
+			require('${this.entry}')
+		})(${JSON.stringify(code)})`;
+		// 把文件内容写入到文件系统
+		fs.writeFileSync(filePath, bundle, 'utf8');
+	}
 }
 
 new Compiler(options).run();
