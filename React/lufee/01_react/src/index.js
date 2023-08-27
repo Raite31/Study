@@ -1,6 +1,8 @@
 // 项目的入口文件
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './App'; // 导入组件
+
 // 思考：<h2>hello,react</h2>是什么
 // 是JSX == JavaScript+Xml 对象 虚拟DOM元素
 // 插入变量，和Vue的{{}}相同
@@ -63,4 +65,18 @@ const filterEle = (
 		})}
 	</ul>
 );
-ReactDOM.render(filterEle, document.querySelector('#root'));
+// ReactDOM.render(filterEle, document.querySelector('#root'));
+
+// React核心思想是组件化开发，其实就是玩JavaScript，就是一个函数
+
+// props&组件
+// 1. 函数式声明，函数式组件，本质就是一个函数
+// 注意：（1）首字母必须大写 （2）必须有返回值
+function Welcome(props) {
+	return <h2>hello,{props.name}</h2>;
+}
+ReactDOM.render(<Welcome name="welcome" />, document.querySelector('#root'));
+
+
+
+ReactDOM.render(<App name="你好" />, document.querySelector('#root'));
