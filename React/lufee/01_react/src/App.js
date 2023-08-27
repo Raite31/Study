@@ -1,5 +1,8 @@
 // import React from "react";
 import React, { Component } from 'react'; // 解构出Component，然后下面就不用再React.Component
+// 一切皆模块
+import './App.css';
+import Logo from './logo.svg';
 
 // 2. 类声明 ES6，实际开发中应用最多
 // 注意：（1）React.Component是一个基类，使用类声明的组件，必须继承这个基类 （2）在类中，必须有render函数 （3）在render函数中，需要return一个jsx元素 （4）组件名称必须以大写字母开头
@@ -15,7 +18,12 @@ class MyBtn extends Component {
 
 class Avatar extends Component {
 	render() {
-		return <img src={this.props.user.avatarUrl}></img>;
+		return (
+			<div>
+				<img src={this.props.user.avatarUrl} alt="" />
+				<img src={Logo} alt="" />
+			</div>
+		);
 	}
 }
 
@@ -33,13 +41,18 @@ class UserInfo extends Component {
 
 // App=>A=>B
 class Comment extends Component {
+	handleClick = () => {
+		// 用箭头函数解决this指向问题
+		// 也不可以修改props
+		this.props.add('自组件中的值'); // 这里的this指向谁？
+	};
 	render() {
 		return (
 			<div className="comment">
 				{/*用户信息*/}
 				<UserInfo user={this.props.user}></UserInfo>
-                {/* 以下写法都可以，以下写法在自组件中就不需要再this.props.user.name了，只需要this.props.name*/}
-				{/* <UserInfo {...this.props.user}></UserInfo> */} 
+				{/* 以下写法都可以，以下写法在自组件中就不需要再this.props.user.name了，只需要this.props.name*/}
+				{/* <UserInfo {...this.props.user}></UserInfo> */}
 				{/* <UserInfo avatarUrl={this.props.user.avatarUrl} name={this.props.user.name}></UserInfo> */}
 				{/*用户评论内容*/}
 				<div className="comment-content">
@@ -47,6 +60,7 @@ class Comment extends Component {
 				</div>
 				{/*用户评论时间*/}
 				<div className="comment-date">发布时间：{this.props.user.date}</div>
+				<button onClick={this.handleClick}>子传父</button>
 			</div>
 		);
 	}
@@ -63,7 +77,12 @@ export default class App extends Component {
 			name: '皮卡丘',
 			content: '皮卡丘传奇',
 			date: new Date().toLocaleDateString(),
+			val: 'hello',
 		};
+	}
+	add(val) {
+		// alert(val)
+		// this.user.val = val; //这样是无法改变视图上的值的
 	}
 
 	// 生命周期
@@ -73,11 +92,12 @@ export default class App extends Component {
 		return (
 			<div>
 				<h2>App, {this.props.name}</h2>
+				<h1>{this.user.val}</h1>
 				<MyBtn title="提交"></MyBtn>
 				<MyBtn title="删除"></MyBtn>
 				<MyBtn title="修改"></MyBtn>
 				{/* 传递数据 */}
-				<Comment user={this.user}></Comment>
+				<Comment user={this.user} add={this.add}></Comment>
 			</div>
 		);
 	}
