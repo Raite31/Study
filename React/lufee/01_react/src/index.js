@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App'; // 导入组件
+import LifyCycle from './LifyCycle';
 
 // 思考：<h2>hello,react</h2>是什么
 // 是JSX == JavaScript+Xml 对象 虚拟DOM元素
@@ -75,8 +76,8 @@ const filterEle = (
 function Welcome(props) {
 	return <h2>hello,{props.name}</h2>;
 }
-ReactDOM.render(<Welcome name="welcome" />, document.querySelector('#root'));
+// ReactDOM.render(<Welcome name="welcome" />, document.querySelector('#root'));
+// ReactDOM.render(<App name="你好" />, document.querySelector('#root'));
 
 
-
-ReactDOM.render(<App name="你好" />, document.querySelector('#root'));
+ReactDOM.render(<LifyCycle />, document.querySelector('#root'));
