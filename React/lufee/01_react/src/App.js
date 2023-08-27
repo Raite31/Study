@@ -13,11 +13,58 @@ class MyBtn extends Component {
 	}
 }
 
+class Avatar extends Component {
+	render() {
+		return <img src={this.props.user.avatarUrl}></img>;
+	}
+}
+
+class UserInfo extends Component {
+	render() {
+		return (
+			<div className="userinfo">
+				<Avatar user={this.props.user.avatarUrl}></Avatar>
+				<img src={this.props.user.avatarUrl} alt=""></img>
+				<div className="username">{this.props.user.name}</div>
+			</div>
+		);
+	}
+}
+
+// App=>A=>B
+class Comment extends Component {
+	render() {
+		return (
+			<div className="comment">
+				{/*用户信息*/}
+				<UserInfo user={this.props.user}></UserInfo>
+                {/* 以下写法都可以，以下写法在自组件中就不需要再this.props.user.name了，只需要this.props.name*/}
+				{/* <UserInfo {...this.props.user}></UserInfo> */} 
+				{/* <UserInfo avatarUrl={this.props.user.avatarUrl} name={this.props.user.name}></UserInfo> */}
+				{/*用户评论内容*/}
+				<div className="comment-content">
+					评论内容：{this.props.user.content}
+				</div>
+				{/*用户评论时间*/}
+				<div className="comment-date">发布时间：{this.props.user.date}</div>
+			</div>
+		);
+	}
+}
+
 // export default class App extends React.Component {
 export default class App extends Component {
-	// constructor(props) {
-	// 	super(props);
-	// }
+	constructor(props) {
+		super(props);
+		// React遵循单项数据流，只能从父传到子，不能逆向
+		this.user = {
+			avatarUrl:
+				'https://s1.52poke.wiki/wiki/thumb/0/0d/025Pikachu.png/260px-025Pikachu.png',
+			name: '皮卡丘',
+			content: '皮卡丘传奇',
+			date: new Date().toLocaleDateString(),
+		};
+	}
 
 	// 生命周期
 	// 必须使用render函数，能将虚拟DOM渲染成真实DOM
@@ -29,6 +76,8 @@ export default class App extends Component {
 				<MyBtn title="提交"></MyBtn>
 				<MyBtn title="删除"></MyBtn>
 				<MyBtn title="修改"></MyBtn>
+				{/* 传递数据 */}
+				<Comment user={this.user}></Comment>
 			</div>
 		);
 	}
