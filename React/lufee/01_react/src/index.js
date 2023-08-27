@@ -23,4 +23,17 @@ function getGeeting(user) {
 	return <h1>hello,react</h1>;
 }
 
-ReactDOM.render(getGeeting(user), document.querySelector('#root'));
+// ReactDOM.render(getGeeting(user), document.querySelector('#root'));
+
+// React只会更新它需要更新的部分
+function tick() {
+	const element = (
+		<div>
+            {/* h1是不更新的，只有h2发生更新 */}
+			<h1>Hello, world!</h1>
+			<h2>{new Date().toLocaleTimeString()}.</h2>
+		</div>
+	);
+	ReactDOM.render(element, document.querySelector('#root'));
+}
+setInterval(tick, 1000);
