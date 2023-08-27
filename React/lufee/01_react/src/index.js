@@ -5,6 +5,7 @@ import App from './App'; // 导入组件
 import LifyCycle from './LifyCycle';
 import ControlInput from './ControlInput';
 import NoControlInput from './NoControlInput';
+import FormSimple from './FormSimple';
 
 // 思考：<h2>hello,react</h2>是什么
 // 是JSX == JavaScript+Xml 对象 虚拟DOM元素
@@ -82,5 +83,6 @@ function Welcome(props) {
 // ReactDOM.render(<App name="你好" />, document.querySelector('#root'));
 // ReactDOM.render(<LifyCycle />, document.querySelector('#root'));
 // ReactDOM.render(<ControlInput />, document.querySelector('#root'));
-ReactDOM.render(<NoControlInput />, document.querySelector('#root'));
+// ReactDOM.render(<NoControlInput />, document.querySelector('#root'));
+ReactDOM.render(<FormSimple />, document.querySelector('#root'));
 
