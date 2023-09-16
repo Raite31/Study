@@ -42,6 +42,10 @@ import React, { Component, PureComponent } from 'react';
 // }
 
 // 3. 第三种解决方案 高阶组件
+
+// 组件组合而非继承
+// React有十分强大的组合模式，推荐使用组合而非继承来实现组件间的代码崇勇
+
 const Comment = React.memo(({ id, content, author }) => {
 	console.log('render');
 	return (

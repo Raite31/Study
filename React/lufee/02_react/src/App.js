@@ -5,13 +5,15 @@ import './App.css';
 // import 'antd/dist/reset.css'
 import { Button } from 'antd';
 import CommentList from './components/CommentList';
+import Compond from './components/Compond';
 
 function App() {
-  return (
-    <div className="App">
-      <CommentList></CommentList>
-    </div>
-  );
+	return (
+		<div className="App">
+			{/* <CommentList></CommentList> */}
+			<Compond></Compond>
+		</div>
+	);
 }
 
 export default App;
