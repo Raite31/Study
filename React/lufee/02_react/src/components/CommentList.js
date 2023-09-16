@@ -9,7 +9,7 @@ function Comment(props){
         </div>
     )
 }
-
+// 聪明式组件设计成类 傻瓜式组件仅单纯展示
 export default class CommentList extends Component {
 	constructor(props) {
 		super(props);
