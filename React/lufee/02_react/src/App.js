@@ -4,25 +4,12 @@ import './App.css';
 // import Button from 'antd/es/button'
 // import 'antd/dist/reset.css'
 import { Button } from 'antd';
+import CommentList from './components/CommentList';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Button type='primary'>登陆</Button>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <CommentList></CommentList>
     </div>
   );
 }
