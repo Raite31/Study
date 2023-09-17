@@ -50,6 +50,9 @@ const highOrderCom = (Comp) => {
 	};
 };
 
+@highOrderCom
+@withLog
+@withLog // 由下往上执行
 class Hoc extends Component {
 	render() {
 		return (
@@ -64,8 +67,9 @@ class Hoc extends Component {
 	}
 }
 // export default highOrderCom(Hoc);
-// 链式调用
-export default highOrderCom(withLog(withLog(Hoc)));
+// 链式调用，由内到外执行
+// export default highOrderCom(withLog(withLog(Hoc)));
+export default Hoc;
 
 /**
  * 1。 为什么我们需要高阶组件？
