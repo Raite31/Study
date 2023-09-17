@@ -7,6 +7,8 @@ import { Button } from 'antd';
 import CommentList from './components/CommentList';
 import Compond from './components/Compond';
 import Hoc from './components/Hoc';
+import MovieA from './components/MovieA';
+import MovieB from './components/MovieB';
 
 function App() {
 	return (
@@ -15,6 +17,8 @@ function App() {
 			<Compond></Compond>
 			<h3>高阶组件的使用</h3>
 			<Hoc></Hoc>
+			<MovieA></MovieA>
+			<MovieB></MovieB>
 		</div>
 	);
 }
