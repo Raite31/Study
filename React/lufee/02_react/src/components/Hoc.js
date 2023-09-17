@@ -17,6 +17,15 @@ import React, { Component } from 'react';
 // };
 
 // 重写组件生命周期
+// 打印日志的高阶组件
+const withLog = (Comp) => {
+	console.log(Comp.name + '渲染了');
+	const newCom = (props) => {
+		return <Comp {...props}></Comp>;
+	};
+	return newCom;
+};
+
 const highOrderCom = (Comp) => {
 	// 返回一个新组件
 	return class extends Component {
@@ -26,9 +35,7 @@ const highOrderCom = (Comp) => {
 		componentDidMount() {
 			console.log('发起ajax请求');
 		}
-		handleClick = () => {
-
-        };
+		handleClick = () => {};
 		render() {
 			// 属性代码是最常见的实现方式
 			return (
@@ -56,7 +63,9 @@ class Hoc extends Component {
 		);
 	}
 }
-export default highOrderCom(Hoc);
+// export default highOrderCom(Hoc);
+// 链式调用
+export default highOrderCom(withLog(withLog(Hoc)));
 
 /**
  * 1。 为什么我们需要高阶组件？
