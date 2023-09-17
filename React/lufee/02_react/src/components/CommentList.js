@@ -44,7 +44,10 @@ import React, { Component, PureComponent } from 'react';
 // 3. 第三种解决方案 高阶组件
 
 // 组件组合而非继承
-// React有十分强大的组合模式，推荐使用组合而非继承来实现组件间的代码崇勇
+// React有十分强大的组合模式，推荐使用组合而非继承来实现组件间的代码重用
+// 高阶组件=》高阶函数 
+// 组件设计的目的：保证组件功能的单一性
+// 高阶组件：不是组件，本质是一个函数，该函数接收一个或多个组件，返回一个新组件，Comment为高阶组件
 
 const Comment = React.memo(({ id, content, author }) => {
 	console.log('render');

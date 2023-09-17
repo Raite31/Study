@@ -6,12 +6,15 @@ import './App.css';
 import { Button } from 'antd';
 import CommentList from './components/CommentList';
 import Compond from './components/Compond';
+import Hoc from './components/Hoc';
 
 function App() {
 	return (
 		<div className="App">
 			{/* <CommentList></CommentList> */}
 			<Compond></Compond>
+			<h3>高阶组件的使用</h3>
+			<Hoc></Hoc>
 		</div>
 	);
 }
