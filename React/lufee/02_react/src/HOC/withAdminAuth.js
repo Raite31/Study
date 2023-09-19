@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-export const withAdminAuth = (Comp) => {
+export const withAdminAuth = (role) => (Comp) => {
 	return class extends Component {
 		constructor(props) {
 			super(props);
@@ -10,9 +10,10 @@ export const withAdminAuth = (Comp) => {
 		}
 		componentDidMount() {
 			// 假设已经从后端获取到该页面用户的权限
-			const currentRole = 'Admin';
+			// const currentRole = 'Admin';
+			const currentRole = '用户A';
 			this.setState({
-				isAdmin: currentRole === 'Admin',
+				isAdmin: currentRole === role,
 			});
 		}
 		render() {

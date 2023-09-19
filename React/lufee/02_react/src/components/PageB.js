@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withAdminAuth } from '../HOC/withAdminAuth';
 
-@withAdminAuth // 组件的页面复用
+@withAdminAuth('用户B') // 组件的页面复用
 class PageB extends Component {
 	render() {
 		return (
