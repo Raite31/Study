@@ -50,9 +50,9 @@ const highOrderCom = (Comp) => {
 	};
 };
 
-@highOrderCom
-@withLog
-@withLog // 由下往上执行
+// @highOrderCom
+// @withLog
+// @withLog // 由下往上执行
 class Hoc extends Component {
 	render() {
 		return (

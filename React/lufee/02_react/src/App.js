@@ -9,6 +9,8 @@ import Compond from './components/Compond';
 import Hoc from './components/Hoc';
 import MovieA from './components/MovieA';
 import MovieB from './components/MovieB';
+import PageA from './components/PageA';
+import PageB from './components/PageB';
 
 function App() {
 	return (
@@ -19,6 +21,8 @@ function App() {
 			<Hoc></Hoc>
 			<MovieA></MovieA>
 			<MovieB></MovieB>
+			<PageA></PageA>
+			<PageB></PageB>
 		</div>
 	);
 }
