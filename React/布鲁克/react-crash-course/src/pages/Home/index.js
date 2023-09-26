@@ -5,19 +5,12 @@ import List from './components/List';
 import './index.css';
 
 const Home = () => {
-	const [a, setA] = useState(100);
-	function plus() {
-		setA(function (prev) {
-			return prev + 200;
-		});
-	}
+	const [data, setData] = useState([]);
 
 	return (
 		<div className="app">
-			{a}
-			<button onClick={plus}>加法</button>
-			<Edit></Edit>
-			<List></List>
+			<Edit add={setData}></Edit>
+			<List listData={data} deleteData={setData}></List>
 		</div>
 	);
 };

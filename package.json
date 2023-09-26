@@ -4,10 +4,12 @@
     "create-react-app": "^5.0.1",
     "element-plus": "^2.3.7",
     "element-ui": "^2.15.13",
+    "prettier": "^3.0.3",
     "tar": "^6.1.15",
     "three": "^0.153.0",
     "three-orbitcontrols": "^2.110.3",
     "tween.js": "^16.6.0",
+    "uuid": "^9.0.1",
     "vue": "^3.2.47",
     "webpack": "^5.85.1"
   },
