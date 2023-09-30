@@ -24,10 +24,13 @@ async function fetchSetData(data) {
 
 const Home = () => {
 	const [data, setData] = useState([]);
-	
+	const submittingStatus = useRef(false); // 如果他是false，这个页面的东西更新了多少次 他都不会渲染 如果是true，才会渲染
 
 	useEffect(() => {
-		fetchSetData(data);
+		if (!submittingStatus.current) {
+			return;
+		}
+		fetchSetData(data).then((data) => (submittingStatus.current = false));
 	}, [data]);
 
 	// 括号绑定哪个数据，哪个数据变动触发渲染页面就会触发一次
@@ -47,8 +50,12 @@ const Home = () => {
 
 	return (
 		<div className="app">
-			<Edit add={setData}></Edit>
-			<List listData={data} deleteData={setData}></List>
+			<Edit add={setData} submittingStatus={submittingStatus}></Edit>
+			<List
+				listData={data}
+				deleteData={setData}
+				submittingStatus={submittingStatus}
+			></List>
 		</div>
 	);
 };
