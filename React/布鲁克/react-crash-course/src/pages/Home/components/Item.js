@@ -1,5 +1,11 @@
-const Item = ({ note, date, time }) => {
+const Item = ({ id, note, date, time, deleteData }) => {
 	console.log('data:', note, date, time);
+
+	function deleteItem() {
+		deleteData(function (prev) {
+			return prev.filter((item) => item.id !== id);
+		});
+	}
 	return (
 		<div className="item">
 			{/* <div>{data[0].note}</div>
@@ -9,7 +15,9 @@ const Item = ({ note, date, time }) => {
 			<div>{note}</div>
 			<div>{date}</div>
 			<div>{time}</div>
-			<button className="remove">删除</button>
+			<button className="remove" onClick={deleteItem}>
+				删除
+			</button>
 		</div>
 	);
 };

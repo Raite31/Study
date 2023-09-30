@@ -8,6 +8,7 @@ const List = ({ listData, deleteData }) => {
 				return (
 					<Item
 						key={id}
+						id={id}
 						note={note}
 						date={date}
 						time={time}
