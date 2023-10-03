@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "animejs": "^3.2.1",
-    "create-react-app": "^5.0.1",
+    "bootstrap": "^5.2.3",
+    "create-react-app": "^1.2.1",
     "element-plus": "^2.3.7",
     "element-ui": "^2.15.13",
     "prettier": "^3.0.3",
