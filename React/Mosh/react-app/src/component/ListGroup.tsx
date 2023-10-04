@@ -1,15 +1,19 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { MouseEvent } from 'react';
 
 function ListGroup() {
-	const items = ['New York', 'San Franciso', 'Tokyo', 'London', 'Paris'];
-	// const items = []
+	let items = ['New York', 'San Franciso', 'Tokyo', 'London', 'Paris'];
+	// items = []
+	// let selectedIndex = 0;
+
+	// Hook
+	const [selectedIndex, setSelectedIndex] = useState(-1);
 
 	const getMessage = () => {
 		return items.length === 0 ? <p>No item found</p> : null;
 	};
 
-    // ts类型绑定
+	// ts类型绑定
 	const handleClick = (event: MouseEvent, item: string, index: number) => {
 		console.log(event, item, index);
 	};
@@ -23,7 +27,17 @@ function ListGroup() {
 			{items.length === 0 && <p>No item found</p>}
 			<ul className="list-group">
 				{items.map((item, index) => (
-					<li className="list-group-item" key={item} onClick={handleClick}>
+					<li
+						className={
+							selectedIndex === index
+								? 'list-group-item active'
+								: 'list-group-item'
+						}
+						key={item}
+						onClick={() => {
+							setSelectedIndex(index);
+						}}
+					>
 						{/* onClick中调用的事件，不能有括号，不然就不是点击时才调用 而是一运行就调用了 */}
 						{item}
 					</li>
