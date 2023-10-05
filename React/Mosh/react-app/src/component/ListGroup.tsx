@@ -1,31 +1,39 @@
 import { Fragment, useState } from 'react';
 import { MouseEvent } from 'react';
 
-function ListGroup() {
-	let items = ['New York', 'San Franciso', 'Tokyo', 'London', 'Paris'];
+// {items: [], heading: string}
+interface Props {
+	items: string[];
+	heading: string;
+}
+
+// function ListGroup(props: Props) {
+function ListGroup({ items, heading }: Props) {
 	// items = []
 	// let selectedIndex = 0;
 
 	// Hook
 	const [selectedIndex, setSelectedIndex] = useState(-1);
 
-	const getMessage = () => {
-		return items.length === 0 ? <p>No item found</p> : null;
-	};
+	// const getMessage = () => {
+	// 	return items.length === 0 ? <p>No item found</p> : null;
+	// };
 
-	// ts类型绑定
-	const handleClick = (event: MouseEvent, item: string, index: number) => {
-		console.log(event, item, index);
-	};
+	// // ts类型绑定
+	// const handleClick = (event: MouseEvent, item: string, index: number) => {
+	// 	console.log(event, item, index);
+	// };
 
 	return (
 		// 一个return里不能有多个根标签
 		// 我们可以使用<></>空标签, 也可以使用Fragment
 		<Fragment>
-			<h1>List</h1>
-			{getMessage()}
+			<h1>{heading}</h1>
+			{/* {getMessage()} */}
+			{/* {props.items.length === 0 && <p>No item found</p>} */}
 			{items.length === 0 && <p>No item found</p>}
 			<ul className="list-group">
+				{/* {props.items.map((item, index) => ( */}
 				{items.map((item, index) => (
 					<li
 						className={
