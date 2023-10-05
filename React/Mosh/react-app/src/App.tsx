@@ -4,10 +4,18 @@ import ListGroup from './component/ListGroup';
 function App() {
 	let items = ['New York', 'San Franciso', 'Tokyo', 'London', 'Paris'];
 
+	const handleSelectItem = (item: string) => {
+		console.log(item);
+	};
+
 	return (
 		<div>
 			{/* 每个组件都有自己的状态 不会相互混乱 */}
-			<ListGroup items={items} heading="Cities"></ListGroup>
+			<ListGroup
+				items={items}
+				heading="Cities"
+				onSelectItem={handleSelectItem}
+			></ListGroup>
 			{/* <ListGroup></ListGroup> */}
 		</div>
 	);

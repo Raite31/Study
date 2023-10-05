@@ -5,10 +5,12 @@ import { MouseEvent } from 'react';
 interface Props {
 	items: string[];
 	heading: string;
+	// (item: string) => void
+	onSelectItem: (item: string) => void; // onClick
 }
 
 // function ListGroup(props: Props) {
-function ListGroup({ items, heading }: Props) {
+function ListGroup({ items, heading, onSelectItem }: Props) {
 	// items = []
 	// let selectedIndex = 0;
 
@@ -44,6 +46,7 @@ function ListGroup({ items, heading }: Props) {
 						key={item}
 						onClick={() => {
 							setSelectedIndex(index);
+							onSelectItem(item);
 						}}
 					>
 						{/* onClick中调用的事件，不能有括号，不然就不是点击时才调用 而是一运行就调用了 */}
