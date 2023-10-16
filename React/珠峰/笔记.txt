@@ -1,6 +1,11 @@
 课外知识点
     package-lock.json 文件是使用npm的标志，如果要使用yarn，可以直接删除掉package-lock.json
     package.json 记录了可运行的命令、安装的模块、用到的东西
+    react常用版本
+        @1 15版本：「太早了」
+        @2 16版本：项目用得最多的
+        @3 17版本：最大的升级就是看不出升级「语法没变啥，只是底层处理机制上升级了」
+        @4 18版本：新版本「机制和语法上都有区别」
 
 如何划分组件
     业务组件：针对项目需求封装的
@@ -29,4 +34,20 @@ React的工程化/组件化开发
     基于脚手架创建React工程化项目
         $ create-react-app 项目名称
             + 项目名称要遵循npm包命名规范：使用“数字、小写字母、_”命名
+        项目目录
+            ｜- node_modules
+            ｜- src：所有后续编写的代码，几乎都放在SRC下「打包的时候，一般只对这个目录下的代码进行处理」
+                ｜- index.js
+            ｜- public：放页面模版
+                ｜-index.html
+            ｜- package.json
+            ｜- 。。。
 
+一个React项目中，默认会安装：
+    react：React框架的核心
+    react-dom：React视图渲染的核心「基于React构建WebApp（HTML页面）」
+    ----->  react-native：构建和渲染App的
+    react-scripts：脚手架为了让项目目录看起来干净一些，把webpack打包的规则及相关的插件/LOADER等都隐藏到了node_modules目录下，
+    react-scripts就是脚手架中自己对打包命令的一种封装，基于它打包，会调用node_modules中的webpack等进行处理！！
+
+     
