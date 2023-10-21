@@ -50,4 +50,11 @@ React的工程化/组件化开发
     react-scripts：脚手架为了让项目目录看起来干净一些，把webpack打包的规则及相关的插件/LOADER等都隐藏到了node_modules目录下，
     react-scripts就是脚手架中自己对打包命令的一种封装，基于它打包，会调用node_modules中的webpack等进行处理！！
 
-     
+常见的配置修改
+    @1 把sass改为less
+        $ yarn add less less-loader@8
+        $ yarn remove sass-loader
+        create-react-app脚手架默认webpack规则的修改：直接去暴露的源码中修改
+            在webpack.config.js中 找到sassRegex和sassModuleRegex修改，然后在module中的oneOf也进行相应的修改，具体看Notion笔记
+    @2 配置别名
+        在resolve的alias里配置
