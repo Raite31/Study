@@ -58,3 +58,22 @@ React的工程化/组件化开发
             在webpack.config.js中 找到sassRegex和sassModuleRegex修改，然后在module中的oneOf也进行相应的修改，具体看Notion笔记
     @2 配置别名
         在resolve的alias里配置
+
+React是Web前端框架
+    1.目前是市面上比较主流的前端框架
+        + React
+        + Vue
+        + Angular 「NG」
+        主流思想：不直接操作DOM，而是改用”数据驱动思想“
+        操作DOM思想：
+            + 操作DOM比较消耗性能「主要原因就是：可能会导致DOM重排（回流）/重绘」
+            + 操作起来也相对来讲麻烦一些
+        数据驱动思想：
+            + 不再操作DOM
+            + 操作数据「当我们修改了数据，框架会按照相关的数据，让页面重新渲染」
+            + 框架底层实现视图的渲染，也是基于操作DOM完成的
+                + 构建了一套 虚拟DOM->真实DOM 的渲染体系
+                + 有效避免了DOM的重排/重绘
+            + 开发效率更高、最后的性能也相对较好
+    2.React框架采用MVC体系；Vue框架采用MVVM体系；
+        MVC: model数据层 + 
