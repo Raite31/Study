@@ -1,3 +1,11 @@
+/*
+ * @Author: 李嘉胜 2330165939@qq.com
+ * @Date: 2023-10-17 01:00:10
+ * @LastEditors: 李嘉胜 2330165939@qq.com
+ * @LastEditTime: 2023-11-02 12:57:13
+ * @FilePath: /珠峰/demo/src/index.jsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 // 对ES6内置API做兼容处理
 import 'react-app-polyfill/ie9';
 import 'react-app-polyfill/ie11';
@@ -59,7 +67,7 @@ root.render(
 		{/* 稀疏数组和密集数组：
 			稀疏数组无法使用map方法，密集数组才可以
 		*/}
-		{new Array(5).fill(null).map((_, index) => {
+		{new Array(5).fill(null).map((_, index) 1=> {
 			return <button key={index}>按钮{index + 1}</button>;
 		})}
 	</>
