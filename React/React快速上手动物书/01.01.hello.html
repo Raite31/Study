@@ -15,6 +15,7 @@
     <script src="react/build/react-dom.js"></script>
     <script>
         // 应用的JS代码
+        // ========================= 最普通的
         // ReactDOM.render(
         //     React.DOM.h1({
         //         id: "my-heading"
@@ -22,7 +23,7 @@
         //     document.getElementById("app")
         // )
 
-        // 嵌套
+        // ========================= 嵌套
         // ReactDOM.render(
         //     React.DOM.h1({
         //         id: 'you'
@@ -32,29 +33,67 @@
         //     document.getElementById("app")
         // )
 
-        // className htmlFor
-        ReactDOM.render(
-            React.DOM.h1({
-                className: 'pretty',
-                htmlFor: 'me',
-            },
-                React.DOM.em(null, "HELl")
-            ),
-            document.getElementById("app")
-        )
+        // ========================= className htmlFor
+        // ReactDOM.render(
+        //     React.DOM.h1({
+        //         className: 'pretty',
+        //         htmlFor: 'me',
+        //     },
+        //         React.DOM.em(null, "HELl")
+        //     ),
+        //     document.getElementById("app")
+        // )
 
-        // style
+        // ========================= style
+        // ReactDOM.render(
+        //     React.DOM.h1({
+        //         className: 'pretty',
+        //         htmlFor: 'me',
+        //         style: {
+        //             background: "black",
+        //             color: "white"
+        //         }
+        //     },
+        //         React.DOM.em(null, "HELl")
+        //     ),
+        //     document.getElementById("app")
+        // )
+
+        // ========================= 组件化
+        // var Component = React.createClass({
+        //     // 组件详细说明
+        //     render: function () {
+        //         return React.DOM.span(null, "i'm so custom")
+        //     }
+        // })
+
+        // ========================= 工厂模式
+        // var ComponentFactory = React.createFactory(Component)
+
+        // ReactDOM.render(
+        //     // React.createElement(Component),
+        //     ComponentFactory(),
+        //     document.getElementById("app")
+        // )
+
+        // ========================= createElement
+        // ReactDOM.render(
+        //     React.createElement("span", null, "Hello"),
+        //     document.getElementById("app")
+        // )
+
+
+        // ========================= 组件传递属性
+        var Component = React.createClass({
+            render: function () {
+                return React.DOM.span(null, "My name is " + this.props.name);
+            }
+        })
+
         ReactDOM.render(
-            React.DOM.h1({
-                className: 'pretty',
-                htmlFor: 'me',
-                style: {
-                    background: "black",
-                    color: "white"
-                }
-            },
-                React.DOM.em(null, "HELl")
-            ),
+            React.createElement(Component, {
+                name: "Bob"
+            }),
             document.getElementById("app")
         )
     </script>
