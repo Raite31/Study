@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Hello React</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div id="app">
+        <div id="add"></div>
+        <!-- 应用渲染的位置 -->
+    </div>
+    <script src="react/build/react.js"></script>
+    <script src="react/build/react-dom.js"></script>
+    <script>
+        // 应用的JS代码
+        // ReactDOM.render(
+        //     React.DOM.h1({
+        //         id: "my-heading"
+        //     }, "Hello world!"),
+        //     document.getElementById("app")
+        // )
+
+        // 嵌套
+        // ReactDOM.render(
+        //     React.DOM.h1({
+        //         id: 'you'
+        //     },
+        //         React.DOM.em(null, "HELl")
+        //     ),
+        //     document.getElementById("app")
+        // )
+
+        // className htmlFor
+        ReactDOM.render(
+            React.DOM.h1({
+                className: 'pretty',
+                htmlFor: 'me',
+            },
+                React.DOM.em(null, "HELl")
+            ),
+            document.getElementById("app")
+        )
+
+        // style
+        ReactDOM.render(
+            React.DOM.h1({
+                className: 'pretty',
+                htmlFor: 'me',
+                style: {
+                    background: "black",
+                    color: "white"
+                }
+            },
+                React.DOM.em(null, "HELl")
+            ),
+            document.getElementById("app")
+        )
+    </script>
+</body>
+
+</html>
