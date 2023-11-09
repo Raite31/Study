@@ -137,7 +137,128 @@
         // )
 
         // ========================= state
+        // var TextAreaCounter = React.createClass({
+        //     _log: function (methodName, args) {
+        //         console.log(methodName, args)
+        //     },
+        //     componentWillUpdate: function () {
+        //         this._log('componentWillUpdate', arguments)
+        //     },
+        //     componentDidUpdate: function (oldProps, oldState) {
+        //         this._log('componentDidUpdate', arguments)
+        //         if (this.state.text.length > 3) {
+        //             this.replaceState(oldProps)
+        //         }
+        //     },
+        //     componentWillMount: function () {
+        //         this._log('componentWillMount', arguments)
+        //     },
+        //     componentDidMount: function () {
+        //         this._log('componentDidMount', arguments)
+
+        //     },
+        //     componentWillUnmount: function () {
+        //         this._log('componentWillUnmount', arguments)
+        //     },
+
+        //     propTypes: {
+        //         text: React.PropTypes.string
+        //     },
+        //     getDefaultProps: function () {
+        //         return {
+        //             text: ''
+        //         }
+        //     },
+        //     getInitialState: function () {
+        //         return {
+        //             text: this.props.text
+        //         }
+        //     },
+        //     _textChange: function (ev) {
+        //         this.setState({
+        //             text: ev.target.value
+        //         })
+        //     },
+        //     render: function () {
+        //         return React.DOM.div(null,
+        //             React.DOM.textarea({
+        //                 // defaultValue: this.props.text,
+        //                 value: this.state.text,
+        //                 onChange: this._textChange
+        //             }),
+        //             // React.DOM.h3(null, this.props.text.length)
+        //             React.DOM.h3(null, this.state.text.length)
+        //         )
+        //     }
+        // })
+
+        // ReactDOM.render(
+        //     React.createElement(TextAreaCounter, {
+        //         text: 'Bob'
+        //     }),
+        //     document.getElementById("app")
+        // )
+
+        // //  从外部访问组件
+        // var myTextAreaCounter = ReactDOM.render(
+        //     React.createElement(TextAreaCounter, {
+        //         defaultValue: "Bob"
+        //     }),
+        //     document.getElementById("app")
+        // )
+
+        // ========================= mixin
+        var logMixin = {
+            _log: function (methodName, args) {
+                console.log(this.name + '::' + methodName, args);
+            },
+            componentWillUpdate: function () {
+                this._log('componentWillUpdate', arguments)
+            },
+            componentDidUpdate: function (oldProps, oldState) {
+                this._log('componentDidUpdate', arguments)
+            },
+            componentWillMount: function () {
+                this._log('componentWillMount', arguments)
+            },
+            componentDidMount: function () {
+                this._log('componentDidMount', arguments)
+            },
+            componentWillUnmount: function () {
+                this._log('componentWillUnmount', arguments)
+            },
+        }
+
+        var MyComponent = React.createClass({
+            mixins: [1, 2, 3]
+        })
+
         var TextAreaCounter = React.createClass({
+            name: 'TextAreaCounter',
+            mixins: [logMixin],
+            _log: function (methodName, args) {
+                console.log(methodName, args)
+            },
+            componentWillUpdate: function () {
+                this._log('componentWillUpdate', arguments)
+            },
+            componentDidUpdate: function (oldProps, oldState) {
+                this._log('componentDidUpdate', arguments)
+                if (this.state.text.length > 3) {
+                    this.replaceState(oldProps)
+                }
+            },
+            componentWillMount: function () {
+                this._log('componentWillMount', arguments)
+            },
+            componentDidMount: function () {
+                this._log('componentDidMount', arguments)
+
+            },
+            componentWillUnmount: function () {
+                this._log('componentWillUnmount', arguments)
+            },
+
             propTypes: {
                 text: React.PropTypes.string
             },
@@ -168,13 +289,6 @@
                 )
             }
         })
-
-        ReactDOM.render(
-            React.createElement(TextAreaCounter, {
-                text: 'Bob'
-            }),
-            document.getElementById("app")
-        )
     </script>
 </body>
 
