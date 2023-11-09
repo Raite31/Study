@@ -83,16 +83,95 @@
         // )
 
 
-        // ========================= 组件传递属性
-        var Component = React.createClass({
+        // ========================= 组件传递属性: this.props
+        // var Component = React.createClass({
+        //     render: function () {
+        //         return React.DOM.span(null, "My name is " + this.props.name);
+        //     }
+        // })
+
+        // ReactDOM.render(
+        //     React.createElement(Component, {
+        //         name: "Bob"
+        //     }),
+        //     document.getElementById("app")
+        // )
+
+        // ========================= propTypes
+        // propTypes的好处：
+        //     + 预先声明，使用户不需要寻找
+        //     + 会在运行时验证属性值的有效性
+        // var Component = React.createClass({
+        //     propTypes: {
+        //         name: React.PropTypes.string.isRequired,
+        //     },
+        //     render: function () {
+        //         return React.DOM.span(null, "My name is " + this.props.name)
+        //     }
+        // })
+
+        // // 默认属性值: getDefaultProps
+        // var Component = React.createClass({
+        //     propTypes: {
+        //         firstName: React.PropTypes.string.isRequired,
+        //         middleName: React.PropTypes.string,
+        //         familyName: React.PropTypes.string.isRequired,
+        //         address: React.PropTypes.string
+        //     },
+        //     getDefaultProps: function () {
+        //         return {
+        //             middleName: "",
+        //             address: 'n/a',
+        //         }
+        //     },
+        //     render: function () {
+        //         // 。。。
+        //     }
+        // })
+
+        // ReactDOM.render(
+        //     React.createElement(Component, {
+        //         name: "Bob"
+        //     }),
+        //     document.getElementById("app")
+        // )
+
+        // ========================= state
+        var TextAreaCounter = React.createClass({
+            propTypes: {
+                text: React.PropTypes.string
+            },
+            getDefaultProps: function () {
+                return {
+                    text: ''
+                }
+            },
+            getInitialState: function () {
+                return {
+                    text: this.props.text
+                }
+            },
+            _textChange: function (ev) {
+                this.setState({
+                    text: ev.target.value
+                })
+            },
             render: function () {
-                return React.DOM.span(null, "My name is " + this.props.name);
+                return React.DOM.div(null,
+                    React.DOM.textarea({
+                        // defaultValue: this.props.text,
+                        value: this.state.text,
+                        onChange: this._textChange
+                    }),
+                    // React.DOM.h3(null, this.props.text.length)
+                    React.DOM.h3(null, this.state.text.length)
+                )
             }
         })
 
         ReactDOM.render(
-            React.createElement(Component, {
-                name: "Bob"
+            React.createElement(TextAreaCounter, {
+                text: 'Bob'
             }),
             document.getElementById("app")
         )
