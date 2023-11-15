@@ -212,6 +212,7 @@
             _log: function (methodName, args) {
                 console.log(this.name + '::' + methodName, args);
             },
+            // 生命周期
             componentWillUpdate: function () {
                 this._log('componentWillUpdate', arguments)
             },
@@ -229,35 +230,25 @@
             },
         }
 
-        var MyComponent = React.createClass({
-            mixins: [1, 2, 3]
+        // var MyComponent = React.createClass({
+        //     mixins: [1, 2, 3]
+        // })
+
+        // 子组件
+        var Counter = React.createClass({
+            name: 'Counter',
+            mixins: [logMixin],
+            propTypes: {
+                count: React.PropTypes.number.isRequired,
+            },
+            render: function () {
+                return React.DOM.span(null, this.props.count)
+            }
         })
 
         var TextAreaCounter = React.createClass({
             name: 'TextAreaCounter',
             mixins: [logMixin],
-            _log: function (methodName, args) {
-                console.log(methodName, args)
-            },
-            componentWillUpdate: function () {
-                this._log('componentWillUpdate', arguments)
-            },
-            componentDidUpdate: function (oldProps, oldState) {
-                this._log('componentDidUpdate', arguments)
-                if (this.state.text.length > 3) {
-                    this.replaceState(oldProps)
-                }
-            },
-            componentWillMount: function () {
-                this._log('componentWillMount', arguments)
-            },
-            componentDidMount: function () {
-                this._log('componentDidMount', arguments)
-
-            },
-            componentWillUnmount: function () {
-                this._log('componentWillUnmount', arguments)
-            },
 
             propTypes: {
                 text: React.PropTypes.string
@@ -278,15 +269,51 @@
                 })
             },
             render: function () {
+                // return React.DOM.div(null,
+                //     React.DOM.textarea({
+                //         // defaultValue: this.props.text,
+                //         value: this.state.text,
+                //         onChange: this._textChange
+                //     }),
+                //     // React.DOM.h3(null, this.props.text.length)
+                //     React.DOM.h3(null, this.state.text.length)
+                // )
+
+                var counter = null;
+                if (this.state.text.length > 0) {
+                    counter = React.DOM.h3(null,
+                        // 渲染Counter组件
+                        React.createElement(Counter, {
+                            count: this.state.text.length
+                        })
+                    )
+                }
                 return React.DOM.div(null,
                     React.DOM.textarea({
-                        // defaultValue: this.props.text,
                         value: this.state.text,
                         onChange: this._textChange
                     }),
-                    // React.DOM.h3(null, this.props.text.length)
-                    React.DOM.h3(null, this.state.text.length)
+                    counter
                 )
+            }
+        })
+
+        ReactDOM.render(
+            React.createElement(TextAreaCounter, {
+                text: 'Bob'
+            }),
+            document.getElementById("app")
+        )
+
+        // 子组件
+        var Counter = React.createClass({
+            name: 'Counter',
+            mixins: [logMixin],
+            propTypes: {
+                count: React.propTypes.number.isRequired,
+            },
+            render: function () {
+                return React.DOM.span(null, this.props.count)
             }
         })
     </script>
