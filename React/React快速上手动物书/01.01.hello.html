@@ -11,7 +11,9 @@
         <div id="add"></div>
         <!-- 应用渲染的位置 -->
     </div>
-    <script src="react/build/react.js"></script>
+    <!-- <script src="react/build/react.js"></script> --> 
+    <!-- 最新版本的React提供了React.PureCompoent基础类，因此无需引入该插件 -->
+    <script src="react/build/react-with-addons.js"></script>
     <script src="react/build/react-dom.js"></script>
     <script>
         // 应用的JS代码
@@ -238,13 +240,16 @@
         var Counter = React.createClass({
             name: 'Counter',
             // mixins: [logMixin],
+            // 通过mixin，让shouldComponentUpdate更加通用，
+            // React.addons.PureRenderMixin包含了对this.props和nextProps，以及this.state和nextState进行比较
+            mixins: [React.addons.PureRenderMixin],
             propTypes: {
                 count: React.PropTypes.number.isRequired,
             },
             // 该方法在componentWillUpdate之前调用，可以进行判断，当非必须时可以取消组件更新
-            shouldComponentUpdate(nextProps, nextState_ignore) {
-                return nextProps.count !== this.props.count
-            },
+            // shouldComponentUpdate(nextProps, nextState_ignore) {
+            //     return nextProps.count !== this.props.count
+            // },
             render: function () {
                 console.log(this.name + '::render()');
                 return React.DOM.span(null, this.props.count)
