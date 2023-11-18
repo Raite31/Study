@@ -237,18 +237,23 @@
         // 子组件
         var Counter = React.createClass({
             name: 'Counter',
-            mixins: [logMixin],
+            // mixins: [logMixin],
             propTypes: {
                 count: React.PropTypes.number.isRequired,
             },
+            // 该方法在componentWillUpdate之前调用，可以进行判断，当非必须时可以取消组件更新
+            shouldComponentUpdate(nextProps, nextState_ignore) {
+                return nextProps.count !== this.props.count
+            },
             render: function () {
+                console.log(this.name + '::render()');
                 return React.DOM.span(null, this.props.count)
             }
         })
 
         var TextAreaCounter = React.createClass({
             name: 'TextAreaCounter',
-            mixins: [logMixin],
+            // mixins: [logMixin],
 
             propTypes: {
                 text: React.PropTypes.string
@@ -278,7 +283,7 @@
                 //     // React.DOM.h3(null, this.props.text.length)
                 //     React.DOM.h3(null, this.state.text.length)
                 // )
-
+                console.log(this.name + '::render()');
                 var counter = null;
                 if (this.state.text.length > 0) {
                     counter = React.DOM.h3(null,
@@ -305,17 +310,6 @@
             document.getElementById("app")
         )
 
-        // 子组件
-        var Counter = React.createClass({
-            name: 'Counter',
-            mixins: [logMixin],
-            propTypes: {
-                count: React.propTypes.number.isRequired,
-            },
-            render: function () {
-                return React.DOM.span(null, this.props.count)
-            }
-        })
     </script>
 </body>
 
