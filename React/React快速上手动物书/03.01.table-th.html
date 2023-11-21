@@ -2,7 +2,7 @@
  * @Author: 李嘉胜 2330165939@qq.com
  * @Date: 2023-11-18 20:42:26
  * @LastEditors: 李嘉胜 2330165939@qq.com
- * @LastEditTime: 2023-11-18 21:47:50
+ * @LastEditTime: 2023-11-21 23:13:53
  * @FilePath: /React快速上手动物书/03.01.table-th.html
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -41,10 +41,20 @@
             getInitialState: function () {
                 return { data: this.props.initialData }
             },
+            propTypes: {
+                headers: React.PropTypes.arrayOf(
+                    React.PropTypes.string
+                ),
+                initialData: React.PropTypes.arrayOf(
+                    React.PropTypes.arrayOf(
+                        React.PropTypes.string
+                    )
+                )
+            },
             render: function () {
                 return (
                     React.DOM.table(null,
-                        React.DOM.thead(null,
+                        React.DOM.thead({onClick: this._sort},
                             React.DOM.tr(null,
                                 this.props.headers.map(function (title, idx) {
                                     return React.DOM.th({ key: idx }, title)
