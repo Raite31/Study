@@ -37,6 +37,7 @@
                     sortby: null,
                     descending: false,
                     edit: null, // {row: index, cell: index} 
+                    search: false, // 
                 }
             },
             propTypes: {
@@ -69,12 +70,12 @@
                 })
             },
             _save: function (e) {
-                e.preventDefault();
+                e.preventDefault(); // 避免网页重新加载
                 //进行保存
                 var input = e.target.firstChild;
-                var data = this.state.data.slice()
-                data[this.state.edit.row][this.state.edit.cell] = input.value
-                this.setState({
+                var data = this.state.data.slice() // 避免直接操作this.state
+                data[this.state.edit.row][this.state.edit.cell] = input.value // 赋值
+                this.setState({ // 更新this.state，使视图重新渲染
                     edit: null, // 完成编辑
                     data: data
                 })
@@ -93,6 +94,43 @@
             // render函数
             render: function () {
                 return (
+                    React.DOM.div(null,
+                        this._renderToolbar(),
+                        this._renderTable()
+                    )
+                )
+            },
+            _renderSearch: function () {
+                if (!this.state.search) {
+                    return null
+                }
+                return (
+                    React.DOM.tr({ onChange: this._search },
+                        this.props.headers.map(function (_ignore, idx) {
+                            return React.DOM.td({ key: idx },
+                                React.DOM.input({
+                                    type: 'text',
+                                    'data-idx': idx
+                                })
+                            )
+                        })
+                    )
+                )
+            },
+            // 专门用来渲染工具栏的
+            _renderToolbar: function () {
+                // TODO:
+                return React.DOM.button(
+                    {
+                        onClick: this._toggleSearch,
+                        className: 'toolbar'
+                    },
+                    'search'
+                )
+            },
+            // 专门用来渲染表单的
+            _renderTable: function () {
+                return (
                     React.DOM.table(null,
                         React.DOM.thead({ onClick: this._sort },
                             React.DOM.tr(null,
@@ -106,6 +144,7 @@
                         ),
                         // 添加点击事件
                         React.DOM.tbody({ onDoubleClick: this._showEditor },
+                            this._renderSearch(),
                             this.state.data.map(function (row, rowidx) {
                                 return (
                                     React.DOM.tr({ key: rowidx },
