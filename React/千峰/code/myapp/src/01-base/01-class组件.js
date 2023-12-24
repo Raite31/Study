@@ -25,6 +25,8 @@ import React from 'react';
 // 组件类，只有继承了React.Component的类才有资格叫组件类
 class App extends React.Component {
 	render() {
+		// 要保证只有一个根节点
+		// 如果是多行内容，则必须加()
 		return <div>hello react Component</div>;
 	}
 }
