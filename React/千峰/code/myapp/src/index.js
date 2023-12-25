@@ -2,7 +2,7 @@
  * @Author: 李嘉胜 2330165939@qq.com
  * @Date: 2023-12-20 23:31:24
  * @LastEditors: 李嘉胜 2330165939@qq.com
- * @LastEditTime: 2023-12-24 22:37:30
+ * @LastEditTime: 2023-12-25 18:25:18
  * @FilePath: /Study/React/千峰/code/myapp/index.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -10,7 +10,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import App from './01-base/01-class组件';
-import App from './01-base/06-事件绑定-2';
+import App from './01-base/07-ref.js';
 
 // 17版本
 // 不需要引入React，在babel编译的时候会自动引入
@@ -18,7 +18,10 @@ import App from './01-base/06-事件绑定-2';
 ReactDOM.render(
 	// jsx 不要加引号
 	// <div>111111</div>
-	// 要保证首字母大写
-	<App></App>,
+	<React.StrictMode>
+		// 要保证首字母大写
+		<App></App>
+	</React.StrictMode>,
+
 	document.getElementById('root')
 );
