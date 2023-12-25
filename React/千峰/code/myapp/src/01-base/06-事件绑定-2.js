@@ -2,7 +2,7 @@
  * @Author: 李嘉胜 2330165939@qq.com
  * @Date: 2023-12-24 22:37:12
  * @LastEditors: 李嘉胜 2330165939@qq.com
- * @LastEditTime: 2023-12-24 23:22:03
+ * @LastEditTime: 2023-12-25 18:07:30
  * @FilePath: /Study/React/千峰/code/myapp/src/01-base/05-事件绑定-1.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -47,13 +47,15 @@ export default class App extends Component {
 		console.log('add2', this.a);
 		// 这里this指向undefined
 	}
-	handleClick3 = () => {
-		console.log('add3', this.a);
+	handleClick3 = (evt) => {
+		console.log('add3', this.a, evt); // evt.target就能获取事件源
 	};
 	handleClick4 = () => {
 		console.log('add4', this.a);
 	};
 }
+
+// React并不会真正地绑定事件到每一个具体《》的元素上，而是采用事件代理的模式
 
 // 修改this指向的几种方法：
 // call, 改变this，自动执行函数
