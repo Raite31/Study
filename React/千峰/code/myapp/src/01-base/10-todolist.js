@@ -2,7 +2,7 @@
  * @Author: 李嘉胜 2330165939@qq.com
  * @Date: 2023-12-24 22:37:12
  * @LastEditors: 李嘉胜 2330165939@qq.com
- * @LastEditTime: 2023-12-27 16:01:30
+ * @LastEditTime: 2023-12-27 16:10:23
  * @FilePath: /Study/React/千峰/code/myapp/src/01-base/05-事件绑定-1.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -46,7 +46,16 @@ export default class App extends Component {
 				</button>
 				<ul>
 					{this.state.list.map((item, index) => (
-						<li key={item.id}>{item.mytext}</li>
+						<li key={item.id}>
+							{item.mytext}
+							<button
+								onClick={() => {
+									this.handelDelClick(item, index);
+								}}
+							>
+								del
+							</button>
+						</li>
 					))}
 				</ul>
 			</div>
@@ -72,5 +81,15 @@ export default class App extends Component {
 		});
 
 		console.log(newList);
+	};
+
+	handelDelClick = (item, index) => {
+		console.log('del', item, index);
+
+		let newList = this.state.list.slice();
+
+		newList.splice(index, 1);
+
+		this.setState({ list: newList });
 	};
 }
