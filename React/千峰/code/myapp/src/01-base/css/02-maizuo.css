@@ -1,0 +1,24 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+ul {
+	list-style: none;
+	width: 100%;
+	position: fixed;
+	bottom: 0px;
+	left: 0;
+	line-height: 50px;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+ul li {
+	text-align: center;
+	flex: 1;
+}
+
+.active {
+	color: red;
+}

@@ -10,7 +10,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import App from './01-base/01-class组件';
-import App from './01-base/11-dangerouslySetInnerHTML';
+import App from './01-base/12-卖座选项卡';
 
 // 17版本
 // 不需要引入React，在babel编译的时候会自动引入
