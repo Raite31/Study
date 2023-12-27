@@ -2,7 +2,7 @@
  * @Author: 李嘉胜 2330165939@qq.com
  * @Date: 2023-12-24 22:37:12
  * @LastEditors: 李嘉胜 2330165939@qq.com
- * @LastEditTime: 2023-12-27 16:19:09
+ * @LastEditTime: 2023-12-27 16:32:06
  * @FilePath: /Study/React/千峰/code/myapp/src/01-base/05-事件绑定-1.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -47,7 +47,15 @@ export default class App extends Component {
 				<ul>
 					{this.state.list.map((item, index) => (
 						<li key={item.id}>
-							{item.mytext}
+							{/* {item.mytext} */}
+
+							{/* 富文本展示 */}
+							<span
+								dangerouslySetInnerHTML={{
+									__html: item.mytext,
+								}}
+							></span>
+
 							<button
 								onClick={() => {
 									this.handelDelClick(item, index);
@@ -63,7 +71,9 @@ export default class App extends Component {
 				{/* {this.state.list.length===0 ? <div>暂无待办事项</div> : null} */}
 
 				{/* 方法二 */}
-				{this.state.list.length === 0 && <div className='hidden'>暂无待办事项</div>}
+				{this.state.list.length === 0 && (
+					<div className="hidden">暂无待办事项</div>
+				)}
 			</div>
 		);
 	}
