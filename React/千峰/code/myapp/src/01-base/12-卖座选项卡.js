@@ -8,7 +8,7 @@ export default class App extends Component {
 	state = {
 		list: [
 			{
-				id: 1,
+				id: 0,
 				text: '电影',
 			},
 			{
@@ -16,7 +16,7 @@ export default class App extends Component {
 				text: '影院',
 			},
 			{
-				id: 1,
+				id: 2,
 				text: '我的',
 			},
 		],
