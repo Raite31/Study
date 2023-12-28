@@ -13,6 +13,11 @@ export default class Navbar extends Component {
 		leftshow: kerwinPropTypes.bool,
 	};
 
+	// 默认值
+	static defaultProps = {
+		leftshow: true,
+	};
+
 	render() {
 		// 属性 是父组件传来的，this.props
 		// console.log(this.props);

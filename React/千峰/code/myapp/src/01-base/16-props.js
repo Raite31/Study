@@ -12,11 +12,11 @@ export default class App extends Component {
 				</div>
 				<div>
 					<h2>列表</h2>
-					<Navbar title="列表" leftshow={true}></Navbar>
+					<Navbar title="列表"></Navbar>
 				</div>
 				<div>
 					<h2>我的</h2>
-					<Navbar title="购物车" leftshow={true}></Navbar>
+					<Navbar title="购物车"></Navbar>
 				</div>
 			</div>
 		);
