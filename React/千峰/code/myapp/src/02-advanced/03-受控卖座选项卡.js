@@ -2,7 +2,7 @@
  * @Author: 李嘉胜 2330165939@qq.com
  * @Date: 2023-12-29 10:52:09
  * @LastEditors: 李嘉胜 2330165939@qq.com
- * @LastEditTime: 2023-12-29 11:42:08
+ * @LastEditTime: 2023-12-29 11:52:52
  * @FilePath: /Study/React/千峰/code/myapp/src/02-advanced/02-非受控卖座选项卡.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -25,6 +25,20 @@ import Navbar from './amizuocomponent-copy/Navbar';
 export default class App extends Component {
 	state = {
 		current: 0,
+		list: [
+			{
+				id: 0,
+				text: '电影',
+			},
+			{
+				id: 1,
+				text: '影院',
+			},
+			{
+				id: 2,
+				text: '我的',
+			},
+		],
 	};
 
 	render() {
@@ -57,6 +71,8 @@ export default class App extends Component {
 							current: index,
 						});
 					}}
+					current={this.state.current}
+					list={this.state.list}
 				></Tabbar>
 			</div>
 		);
