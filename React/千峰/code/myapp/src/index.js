@@ -18,7 +18,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import App from './01-base/01-class组件';
-import App from './02-advanced/07-发布订阅';
+import App from './02-advanced/08-订阅发布模式案例';
 
 // 17版本
 // 不需要引入React，在babel编译的时候会自动引入

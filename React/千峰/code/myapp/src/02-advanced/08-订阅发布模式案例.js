@@ -2,7 +2,7 @@
  * @Author: 李嘉胜 2330165939@qq.com
  * @Date: 2023-12-29 14:49:10
  * @LastEditors: 李嘉胜 2330165939@qq.com
- * @LastEditTime: 2023-12-29 18:23:53
+ * @LastEditTime: 2023-12-30 21:47:47
  * @FilePath: /Study/React/千峰/code/myapp/src/02-advanced/06-中间人模式.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -10,13 +10,30 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './css/03-communination.css';
 
+// 调度中心
+var bus = {
+	list: [],
+	// 订阅
+	subscribe(callback) {
+		// console.log(callback);
+		this.list.push(callback);
+	},
+
+	// 发布
+	publish(text) {
+		// 遍历所有list，将回调函数执行
+		this.list.forEach((callback) => {
+			callback && callback(text);
+		});
+	},
+};
+
 export default class App extends Component {
 	constructor() {
 		super();
 
 		this.state = {
 			filmList: [],
-			info: '',
 		};
 
 		axios.get(`/test.json`).then((res) => {
@@ -31,16 +48,7 @@ export default class App extends Component {
 		return (
 			<div>
 				{this.state.filmList.map((item) => (
-					<FilmItem
-						key={item.filmId}
-						{...item}
-						onEvent={(value) => {
-							console.log('父组件接收', value);
-							this.setState({
-								info: value,
-							});
-						}}
-					></FilmItem>
+					<FilmItem key={item.filmId} {...item}></FilmItem>
 				))}
 
 				<FilmDetail info={this.state.info}></FilmDetail>
@@ -59,8 +67,8 @@ class FilmItem extends Component {
 			<div
 				className="filmitem"
 				onClick={() => {
-					console.log(synopsis);
-					this.props.onEvent(synopsis);
+					// console.log(synopsis);
+					bus.publish(synopsis);
 				}}
 			>
 				<img src={poster} alt={name}></img>
@@ -72,7 +80,21 @@ class FilmItem extends Component {
 }
 
 class FilmDetail extends Component {
+	constructor() {
+		super();
+		this.state = {
+			info: '',
+		};
+
+		bus.subscribe((info) => {
+			console.log('订阅', info);
+			this.setState({
+				info: info,
+			});
+		});
+	}
+
 	render() {
-		return <div className="filmdetail">{this.props.info}</div>;
+		return <div className="filmdetail">{this.state.info}</div>;
 	}
 }
