@@ -2,7 +2,7 @@
  * @Author: 李嘉胜 2330165939@qq.com
  * @Date: 2023-12-29 14:49:10
  * @LastEditors: 李嘉胜 2330165939@qq.com
- * @LastEditTime: 2023-12-29 18:23:53
+ * @LastEditTime: 2023-12-31 17:50:34
  * @FilePath: /Study/React/千峰/code/myapp/src/02-advanced/06-中间人模式.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -18,7 +18,8 @@ export default class App extends Component {
 			filmList: [],
 			info: '',
 		};
-
+	}
+	componentDidMount() {
 		axios.get(`/test.json`).then((res) => {
 			// console.log(res.data.data.films);
 			this.setState({
