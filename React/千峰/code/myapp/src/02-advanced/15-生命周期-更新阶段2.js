@@ -28,7 +28,7 @@ export default class App extends Component {
 			</div>
 		);
 	}
-	// SCU
+	// SCU 性能优化函数
 	shouldComponentUpdate(nextProps, nextState) {
 		// 关于性能优化
 		// return true; // 应该更新
