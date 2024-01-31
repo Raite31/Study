@@ -18,7 +18,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import App from './01-base/01-class组件';
-import App from './03-hooks/15-useReducer3';
+import App from './03-hooks/16-自定义hooks';
 
 // 17版本
 // 不需要引入React，在babel编译的时候会自动引入
