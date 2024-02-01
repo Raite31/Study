@@ -2,7 +2,7 @@
  * @Author: 李嘉胜 2330165939@qq.com
  * @Date: 2024-02-01 11:55:12
  * @LastEditors: 李嘉胜 2330165939@qq.com
- * @LastEditTime: 2024-02-01 14:50:36
+ * @LastEditTime: 2024-02-01 17:23:33
  * @FilePath: /千峰/code/myapp/src/04-router/views/Nowplaying.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -10,6 +10,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import { withRouter } from 'react-router-dom/cjs/react-router-dom.min';
 
 // 被Route包裹，是Route的好大儿
 export default function Nowplaying(props) {
@@ -56,11 +57,24 @@ export default function Nowplaying(props) {
 	return (
 		<div>
 			{list.map((item) => (
-				<li key={item.filmId} onClick={() => handleChangePage(item.filmId)}>
-					{/* {item.name} */}
-					<NavLink to={'/detail/' + item.filmId}>{item.name}</NavLink>
-				</li>
+				// <FilmItem key={item.filmId} {...item} {...props}></FilmItem>
+				<WithFilmItem key={item.filmId} {...item}></WithFilmItem>
 			))}
 		</div>
 	);
 }
+
+function FilmItem(props) {
+	console.log(props);
+	let { name, filmId, poster } = props;
+	return (
+		<li onClick={() => props.history.push(`/detail/${filmId}`)}>
+			<img src={poster}></img>
+			{name}
+		</li>
+	);
+}
+
+// 父组件没有props时，就弄一个
+// 跨级传输history这些值
+const WithFilmItem = withRouter(FilmItem);
