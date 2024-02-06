@@ -20,6 +20,7 @@ import Center from '../views/Center';
 import NotFound from '../views/NotFound';
 import Detail from '../views/Detail';
 import Login from '../views/Login';
+import City from '../views/City';
 
 function isAuth() {
 	return localStorage.getItem('isAuth');
@@ -55,6 +56,7 @@ export default class index extends Component {
 						></Route>
 
 						<Route path="/login" component={Login}></Route>
+						<Route path="/city" component={City}></Route>
 
 						{/* 动态路由 */}
 						<Route path="/detail/:myid" component={Detail}></Route>
