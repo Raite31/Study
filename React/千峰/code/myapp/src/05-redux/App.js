@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MRouter from './router/IndexRouter';
 import Tabbar from './components/Tabbar';
 import './views/css/App.css';
-import store from '../05-redux/redux/store';
+import store from './redux/store';
 
 export default class App extends Component {
 	state = {
