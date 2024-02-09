@@ -5,6 +5,8 @@ import CityReducer from './reducers/CityReducer';
 import TabbarReducer from './reducers/TabbarReducer';
 import CinemaListReducer from './reducers/CinemaListReducer';
 import { thunk } from 'redux-thunk';
+import reduxPromise from 'redux-promise';
+
 // 这里不要用视频的reduxThunk，会报错，要用{thunk}
 
 const reducer = combineReducers({
@@ -13,7 +15,7 @@ const reducer = combineReducers({
 	CinemaListReducer,
 });
 
-const store = createStore(reducer, applyMiddleware(thunk));
+const store = createStore(reducer, applyMiddleware(thunk, reduxPromise));
 
 function createLeeStore(reducer) {
 	var list = [];

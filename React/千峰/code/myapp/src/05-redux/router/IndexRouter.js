@@ -21,6 +21,7 @@ import NotFound from '../views/NotFound';
 import Detail from '../views/Detail';
 import Login from '../views/Login';
 import City from '../views/City';
+import Search from '../views/Search';
 
 function isAuth() {
 	return localStorage.getItem('isAuth');
@@ -38,7 +39,8 @@ export default class index extends Component {
 					{/* switch 只渲染匹配的第一个 */}
 					<Switch>
 						<Route path="/films" component={Films}></Route>
-						<Route path="/cinemas" component={Cinemas}></Route>
+						<Route path="/cinemas" component={Cinemas} exact></Route>
+						<Route path="/cinemas/search" component={Search}></Route>
 						{/* <Route path="/center" component={Center}></Route> */}
 						{/* 新的写法 方便路由拦截 */}
 						<Route
@@ -87,5 +89,3 @@ export default class index extends Component {
 // 		);
 // 	}
 // }
-
-
