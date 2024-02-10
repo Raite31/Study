@@ -8,33 +8,37 @@
  */
 import React, { useEffect, useState } from 'react';
 import getCinemaListAction from '../redux/actionCreator/getCinemaListAction';
-import store from '../redux/store';
+import { connect } from 'react-redux';
+// import store from '../redux/store';
 
-export default function Cinemas(props) {
-	const [cityName] = useState(store.getState().CityReducer.cityName);
-	const [cinemaList, setCinemaList] = useState(
-		store.getState().CinemaListReducer.list
-	);
+function Cinemas(props) {
+	// const [cityName] = useState(store.getState().CityReducer.cityName);
+	// const [cinemaList, setCinemaList] = useState(
+	// 	store.getState().CinemaListReducer.list
+	// );
+
+	let { list, getCinemaListAction } = props;
 
 	useEffect(() => {
-		if (store.getState().CinemaListReducer.list.length === 0) {
-			console.log(store.getState().CinemaListReducer.list);
+		if (list.length === 0) {
+			// console.log(store.getState().CinemaListReducer.list);
 			// 去后台取数据
 			// actionCreator里面写异步
-			store.dispatch(getCinemaListAction());
+			// store.dispatch(getCinemaListAction());
+			getCinemaListAction();
 		} else {
 			console.log('store缓存');
 		}
 		// 订阅
-		var unsubscribe = store.subscribe(() => {
-			console.log('cinema中订阅', store.getState().CinemaListReducer.list);
-			setCinemaList(store.getState().CinemaListReducer.list);
-		});
-		return () => {
-			// 取消订阅
-			unsubscribe();
-		};
-	}, []);
+		// var unsubscribe = store.subscribe(() => {
+		// 	console.log('cinema中订阅', store.getState().CinemaListReducer.list);
+		// 	setCinemaList(store.getState().CinemaListReducer.list);
+		// });
+		// return () => {
+		// 	// 取消订阅
+		// 	unsubscribe();
+		// };
+	}, [list, getCinemaListAction]);
 	return (
 		<div>
 			<div style={{ overflow: 'hidden' }}>
@@ -44,7 +48,7 @@ export default function Cinemas(props) {
 					}}
 					style={{ float: 'left' }}
 				>
-					{cityName}
+					{props.cityName}
 				</div>
 				<div
 					style={{ float: 'right' }}
@@ -56,7 +60,7 @@ export default function Cinemas(props) {
 				</div>
 			</div>
 
-			{cinemaList.map((item) => {
+			{props.list.map((item) => {
 				return (
 					<dl key={item.cinemaId} style={{ padding: '10px' }}>
 						<dt>{item.name}</dt>
@@ -67,3 +71,15 @@ export default function Cinemas(props) {
 		</div>
 	);
 }
+
+const mapStateToProps = (state) => {
+	return {
+		list: state.CinemaListReducer.list,
+		cityName: state.CityReducer.cityName,
+	};
+};
+const mapDispatchToProps = {
+	getCinemaListAction,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cinemas);

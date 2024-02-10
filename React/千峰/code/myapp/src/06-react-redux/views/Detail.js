@@ -7,6 +7,7 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import React, { useEffect } from 'react';
+import { show, hide } from '../redux/actionCreator/TabbarActionCreator';
 // import store from '../redux/store';
 import { connect } from 'react-redux';
 
@@ -20,6 +21,8 @@ function Detail(props) {
 	// 3. state获取参数
 	// console.log(props.location.state.myid);
 
+	let { show, hide, match } = props;
+
 	useEffect(() => {
 		console.log(props);
 		console.log(props.match.params.myid, '利用id去后端拿数据');
@@ -28,20 +31,22 @@ function Detail(props) {
 		// store.dispatch({
 		// 	type: 'leeHide-tabbar',
 		// });
-
+		hide();
 		return () => {
 			console.log('destory');
 			// store.dispatch({
-			// 	type: 'leeShow-tabbar', 
+			// 	type: 'leeShow-tabbar',
 			// });
+			show();
 		};
-	}, [props.match.params.myid]);
+	}, [match.params.myid, show, hide]);
 
 	return <div>detail</div>;
 }
 
 // connect(将来给孩子传的属性，将来给孩子传的回调函数)
-export default connect(null, {
-	a() {},
-	b() {},
-})(Detail);
+const mapDispatchToProps = {
+	show,
+	hide,
+};
+export default connect(null, mapDispatchToProps)(Detail);

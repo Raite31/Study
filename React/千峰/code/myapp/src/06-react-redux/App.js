@@ -6,7 +6,6 @@ import './views/css/App.css';
 import { connect } from 'react-redux';
 
 class App extends Component {
-
 	// store.subscribe 订阅
 	componentDidMount = () => {
 		console.log(this.props);
@@ -21,14 +20,15 @@ class App extends Component {
 	}
 }
 
-export default connect((state) => {
+const mapStateToProps = (state) => {
 	console.log(state);
 	return {
 		a: 1,
 		b: 2,
 		isShow: state.TabbarReducer.show,
 	};
-})(App);
+};
+export default connect(mapStateToProps)(App);
 
 // films ===> Films
 // cinemas ===> Cinemas
