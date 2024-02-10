@@ -2,31 +2,33 @@ import React, { Component } from 'react';
 import MRouter from './router/IndexRouter';
 import Tabbar from './components/Tabbar';
 import './views/css/App.css';
-import store from './redux/store';
+// import store from './redux/store';
+import { connect } from 'react-redux';
 
-export default class App extends Component {
-	state = {
-		isShow: store.getState(),
-	};
+class App extends Component {
 
 	// store.subscribe 订阅
 	componentDidMount = () => {
-		store.subscribe((value) => {
-			console.log('app 中订阅', store.getState());
-			this.setState({
-				isShow: store.getState().TabbarReducer.show,
-			});
-		});
+		console.log(this.props);
 	};
 
 	render() {
 		return (
 			<div>
-				<MRouter>{this.state.isShow && <Tabbar></Tabbar>}</MRouter>
+				<MRouter>{this.props.isShow && <Tabbar></Tabbar>}</MRouter>
 			</div>
 		);
 	}
 }
+
+export default connect((state) => {
+	console.log(state);
+	return {
+		a: 1,
+		b: 2,
+		isShow: state.TabbarReducer.show,
+	};
+})(App);
 
 // films ===> Films
 // cinemas ===> Cinemas
