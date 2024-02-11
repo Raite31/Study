@@ -5,9 +5,16 @@ import CityReducer from './reducers/CityReducer';
 import TabbarReducer from './reducers/TabbarReducer';
 import CinemaListReducer from './reducers/CinemaListReducer';
 import { thunk } from 'redux-thunk';
+// 这里不要用视频的reduxThunk，会报错，要用{thunk}
 import reduxPromise from 'redux-promise';
 
-// 这里不要用视频的reduxThunk，会报错，要用{thunk}
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+
+const persistConfig = {
+	key: 'lee',
+	storage,
+};
 
 const reducer = combineReducers({
 	CityReducer,
@@ -15,7 +22,13 @@ const reducer = combineReducers({
 	CinemaListReducer,
 });
 
+const persistedReducer = persistReducer(persistConfig, reducer);
+
 const store = createStore(reducer, applyMiddleware(thunk, reduxPromise));
+
+let persistor = persistStore(store);
+
+export { store, persistor };
 
 function createLeeStore(reducer) {
 	var list = [];

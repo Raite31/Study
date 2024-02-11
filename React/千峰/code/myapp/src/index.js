@@ -20,7 +20,9 @@ import ReactDOM from 'react-dom';
 // import App from './01-base/01-class组件';
 import App from './06-react-redux/App';
 import { Provider } from 'react-redux';
-import store from './06-react-redux/redux/store';
+import { store, persistor } from './06-react-redux/redux/store';
+
+import { PersistGate } from 'redux-persist/integration/react';
 
 // 17版本
 // 不需要引入React，在babel编译的时候会自动引入
@@ -31,8 +33,10 @@ ReactDOM.render(
 	// <React.StrictMode>
 	<Provider store={store}>
 		{/* 要保证首字母大写 */}
-		<App></App>
-		{/* </React.StrictMode>, */}
+		<PersistGate loading={null} persistor={persistor}>
+			<App></App>
+			{/* </React.StrictMode>, */}
+		</PersistGate>
 	</Provider>,
 	document.getElementById('root')
 );
