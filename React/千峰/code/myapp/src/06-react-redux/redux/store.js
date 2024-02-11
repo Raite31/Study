@@ -1,6 +1,6 @@
 // 1. 引入redux
 // 2. createStore( reducer )
-import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { applyMiddleware, combineReducers, createStore, compose } from 'redux';
 import CityReducer from './reducers/CityReducer';
 import TabbarReducer from './reducers/TabbarReducer';
 import CinemaListReducer from './reducers/CinemaListReducer';
@@ -24,7 +24,12 @@ const reducer = combineReducers({
 
 const persistedReducer = persistReducer(persistConfig, reducer);
 
-const store = createStore(reducer, applyMiddleware(thunk, reduxPromise));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(
+	persistedReducer,
+	composeEnhancers(applyMiddleware(thunk, reduxPromise))
+);
 
 let persistor = persistStore(store);
 
@@ -32,7 +37,7 @@ export { store, persistor };
 
 function createLeeStore(reducer) {
 	var list = [];
-	var state = reducer();
+	var state = reducer(undefined, {});
 	function subscribe(callback) {
 		list.push(callback);
 	}
