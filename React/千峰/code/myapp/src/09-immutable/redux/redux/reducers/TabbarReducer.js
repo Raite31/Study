@@ -1,8 +1,10 @@
+import { fromJS } from 'immutable';
+
 const TabbarReducer = (
-	prevState = {
+	prevState = fromJS({
 		show: true,
 		// ...
-	},
+	}),
 	action
 ) => {
 	console.log(action);
@@ -10,11 +12,11 @@ const TabbarReducer = (
 	// eslint-disable-next-line default-case
 	switch (action.type) {
 		case 'leeHide-tabbar':
-			newState.show = false;
-			return newState;
+			// newState.show = false;
+			return prevState.set('show', false);
 		case 'leeShow-tabbar':
-			newState.show = true;
-			return newState;
+			// newState.show = true;
+			return prevState.set('show', true);
 		default:
 			return prevState;
 	}

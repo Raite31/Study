@@ -1,3 +1,5 @@
+import { fromJS } from 'immutable';
+
 const CityReducer = (
 	prevState = {
 		cityName: '北京',
@@ -5,12 +7,12 @@ const CityReducer = (
 	},
 	action
 ) => {
-	let newState = { ...prevState };
+	let newState = fromJS(prevState);
 	// eslint-disable-next-line default-case
 	switch (action.type) {
 		case 'change-city':
-			newState.cityName = action.payload;
-			return newState;
+			// newState.cityName = action.payload;
+			return newState.set('cityName', action.payload).toJS();
 		default:
 			return prevState;
 	}
