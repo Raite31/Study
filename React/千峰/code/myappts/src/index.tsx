@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './03-function+ts/04-抽屉';
+import App from './04-router/App';
 import reportWebVitals from './reportWebVitals';
 
 // import './01-ts基础/01-基本类型'
