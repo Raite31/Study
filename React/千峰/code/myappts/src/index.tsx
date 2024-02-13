@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './04-router/App';
+import App from './05-redux/App';
 import reportWebVitals from './reportWebVitals';
 
 // import './01-ts基础/01-基本类型'
