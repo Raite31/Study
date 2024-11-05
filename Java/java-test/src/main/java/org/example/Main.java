@@ -45,5 +45,16 @@ public class Main {
 ////        char c2 = m; // 错误
 //        char c3 = (char) m;
 //        System.out.println(c3); // 100对应的字符，d字符
+
+        int n1;
+        n1 = 13;
+        int n2;
+        n2 = 17;
+        int n3;
+        n3 = n1 + n2;
+        System.out.println("n3 = " + n3);
+        int n4 = 38;
+        int n5 = n4 - n3;
+        System.out.println("n5 = " + n5);
     }
 }
