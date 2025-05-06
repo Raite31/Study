@@ -1,5 +1,5 @@
-exports.constant = {
-  VaLIDATION_ERROR: 400,
+exports.constants = {
+  VALIDATION_ERROR: 400,
   UNAUTHORIZED: 401,
   FORBIDDEN: 403,
   SERVER_ERROR: 500,

@@ -11,7 +11,11 @@
   "author": "Raite",
   "license": "MIT",
   "dependencies": {
-    "express": "^5.1.0"
+    "bcrypt": "^5.1.1",
+    "express": "^5.1.0",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.14.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
