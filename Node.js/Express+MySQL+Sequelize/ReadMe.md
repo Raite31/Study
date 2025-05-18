@@ -15,3 +15,13 @@ Express-generator
 项目创建：express --no-view clwy-api && cd clwy-api
  -- no-view 不创建视图文件，因为是后端开发，不需要前端视图文件
  
+ ## 所需插件
+ 1. nodemon // 热更新
+
+ ## Express项目结构
+ --bin/www 项目启动文件
+ --public 放静态资源
+ --routes 路由
+ --app.js 配置路由、配置跨域
+
+ ## 路由、请求、响应
