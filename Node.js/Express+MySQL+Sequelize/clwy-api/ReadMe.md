@@ -97,3 +97,5 @@ Express-generator
      - 从哪开始 offset
      - 每页多少条 pageSize
      - offset = (currentPage - 1) * pageSize
+6. 白名单过滤表单数据
+   - 用req.body接收数据，会接收用户所有的数据，不管该数据对不对，需不需要

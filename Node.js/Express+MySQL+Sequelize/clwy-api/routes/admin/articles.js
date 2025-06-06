@@ -85,7 +85,10 @@ router.get("/:id", async function (req, res) {
  */
 router.post("/", async function (req, res) {
     try {
-        const article = await Article.create(req.body);
+        // 白名单过滤
+        const body = filterBody(req)
+
+        const article = await Article.create(body);
         res.status(201).json({
             status: true,
             message: "创建文章成功",
@@ -137,8 +140,9 @@ router.put("/:id", async function (req, res) {
     try {
         const {id} = req.params;
         const article = await Article.findByPk(id);
+        const body = filterBody(req)
         if (article) {
-            await article.update(req.body);
+            await article.update(body);
             res.json({
                 status: true,
                 message: "更新文章成功",
@@ -157,5 +161,16 @@ router.put("/:id", async function (req, res) {
         });
     }
 });
+
+/**
+ * 公共方法：白名单过滤
+ * 
+ */
+function filterBody(req){
+    return { 
+        title: req.body.title,
+        content: req.body.content 
+    }
+}
 
 module.exports = router;
