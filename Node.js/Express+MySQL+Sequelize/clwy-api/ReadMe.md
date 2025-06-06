@@ -83,3 +83,9 @@ Express-generator
 3. 新建文章
    - 使用post方法
    - apifox中的参数记得选择body->x-www-form-urlencoded
+4. 模糊搜索
+   - SQL语句中的like与% 
+     - %的意思是允许有其他内容
+   - req.query获取搜索参数值
+     - &符号实现多个查询条件
+   - Node.js中实现模糊搜索
