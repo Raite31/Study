@@ -99,3 +99,6 @@ Express-generator
      - offset = (currentPage - 1) * pageSize
 6. 白名单过滤表单数据
    - 用req.body接收数据，会接收用户所有的数据，不管该数据对不对，需不需要
+7. 验证表单数据
+   - 如何在模型中验证数据？
+      文档链接：https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/
