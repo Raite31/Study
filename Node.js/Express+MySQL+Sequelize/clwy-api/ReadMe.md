@@ -102,3 +102,7 @@ Express-generator
 7. 验证表单数据
    - 如何在模型中验证数据？
       文档链接：https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/
+8. 终极版：增删改查（封装响应，优化代码）
+   - 何为DRY原则？
+   - 如何自定义异常？
+   - 如何将重复的代码封装成函数？
