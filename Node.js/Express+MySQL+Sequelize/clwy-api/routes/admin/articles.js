@@ -9,10 +9,16 @@ const {Op} = require('sequelize')
 router.get("/", async function (req, res) {
     try {
         const query = req.query
+        const currentPage = Math.abs(Number(query.currentPage)) || 1
+        const pageSize = Math.abs(Number(query.pageSize)) || 10
+        const offset = (currentPage - 1) * pageSize;
         const condition = {
             // 双中括号代表不止一个条件
             order: [["id", "DESC"]],
+            limit: pageSize,
+            offset: offset
         };
+
 
         if (query.title) {
             condition.where = {
@@ -22,11 +28,18 @@ router.get("/", async function (req, res) {
             }
         }
 
-        const articles = await Article.findAll(condition);
+        const {count, rows} = await Article.findAndCountAll(condition);
         res.json({
             status: true,
             message: "查询文章列表成功",
-            data: articles,
+            data: {
+                articles: rows,
+                pagination: {
+                    totla: count,
+                    currentPage,
+                    pageSize
+                }
+            },
         });
     } catch (error) {
         res.status(500).json({

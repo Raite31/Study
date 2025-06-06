@@ -89,3 +89,11 @@ Express-generator
    - req.query获取搜索参数值
      - &符号实现多个查询条件
    - Node.js中实现模糊搜索
+5. 数据分页
+   - SQL语句中LIMIT
+     - SELECT * FROM `Article` LIMIT 0, 10;   (从0开始，往后10个)
+   - 三个参数
+     - 当前页数 currentPage
+     - 从哪开始 offset
+     - 每页多少条 pageSize
+     - offset = (currentPage - 1) * pageSize
