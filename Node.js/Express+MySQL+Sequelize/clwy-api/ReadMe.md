@@ -173,3 +173,14 @@ Users：用户表
 Likes：点赞表
 
 Settings：设置表
+
+##### MySQL Workbench的使用
+关联的表如何绘制
+   MySQL Workbench
+
+##### 一口气建完所有表
+回滚迁移（适合数据少或者不重要的时候）
+   sequelize db:migrate:undo （回滚）
+   sequelize db:migrate
+   sequelize db:seed --seed 20250603143053-article
+
