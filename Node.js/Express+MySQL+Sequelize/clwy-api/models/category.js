@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Category extends Model {
     /**
@@ -13,12 +11,40 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Category.init({
-    name: DataTypes.STRING,
-    rank: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'Category',
-  });
+  Category.init(
+    {
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: { msg: "名称已存在，请选择其他名称。" },
+        validate: {
+          notNull: { msg: "名称必须填写。" },
+          notEmpty: { msg: "名称不能为空。" },
+          len: {
+            args: [2, 45],
+            msg: "长度必须在2~45之间。",
+          },
+        },
+      },
+      rank: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "排序必须填写。" },
+          notEmpty: { msg: "排序不能为空。" },
+          isInt: { msg: "排序必须为整数。" },
+          isPositive(value) {
+            if (value < 0) {
+              throw new Error("排序必须为正整数。");
+            }
+          },
+        },
+      },
+    },
+    {
+      sequelize,
+      modelName: "Category",
+    }
+  );
   return Category;
 };
