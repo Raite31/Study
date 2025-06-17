@@ -114,6 +114,7 @@ router.post("/", async function (req, res) {
   try {
     // 白名单过滤
     const body = filterBody(req);
+    // body.password = bcrypt.hashSync(body.password, 10);
 
     // 验证表单数据
     // if (body.title === "") {
