@@ -65,11 +65,16 @@ Express-generator
 1. 建立模型和迁移文件
 2. 根据需求调整迁移文件
 3. 运行迁移，生成数据表
+
 4. 新建种子文件
    - sequelize seed:generate --name course
-5. 将种子文件修改为自己想填充的数据
+5. 到seeders里将种子文件修改为自己想填充的数据
 6. 运行种子文件，将数据填入数据表中
    - sequelize db:seed -seed 20250618030539-course
+7. 到models里添加规则
+8. 到routes里添加路由
+9. 到app.js里添加路由的引用
+9. 到Apifox里添加接口文档
 
 ##### 业务功能
 
@@ -144,12 +149,13 @@ Express-generator
    - delete
 
 ##### 实战数据库设计
-   一对多：hasMany
-   多对一：belongsTo
-   多对多：必须有一张中间表
 
-   普通索引：index
-   唯一索引：unique
+一对多：hasMany
+多对一：belongsTo
+多对多：必须有一张中间表
+
+普通索引：index
+唯一索引：unique
 
 Categories: 分类表
 id（编号）：integer，主键，不为null，无符号，自增
@@ -177,16 +183,19 @@ Likes：点赞表
 Settings：设置表
 
 ##### MySQL Workbench的使用
+
 关联的表如何绘制
-   MySQL Workbench
+MySQL Workbench
 
 ##### 一口气建完所有表
+
 回滚迁移（适合数据少或者不重要的时候）
-   sequelize db:migrate:undo （回滚）
-   sequelize db:migrate
-   sequelize db:seed --seed 20250603143053-article
+sequelize db:migrate:undo （回滚）
+sequelize db:migrate
+sequelize db:seed --seed 20250603143053-article
 
 ##### 用户管理接口
+
 1. 如何通过迁移文件，修改数据表
 2. 后台接口开发定式
    - 种子填充数据
@@ -200,10 +209,12 @@ Settings：设置表
 4. 后台用户管理接口的实现
 
 ##### 使用bcryptjs加密数据
+
 1. 使用bcryptjs
 2. 模型里的set方法
 
 ##### 课程接口
+
 1. 关联模型的使用
 2. 如何防止出现孤儿记录？（没有对应父表记录的数据）
    - 在数据库设置外键约束，确保数据完整性（一般不让用，数据库会产生额外的性能开销）

@@ -15,7 +15,10 @@ router.get("/", async function (req, res) {
     const offset = (currentPage - 1) * pageSize;
     const condition = {
       // 双中括号代表不止一个条件
-      order: [["id", "DESC"]],
+      order: [
+        ["rank", "ASC"],
+        ["id", "ASC"],
+      ],
       limit: pageSize,
       offset: offset,
     };
