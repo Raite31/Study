@@ -37,7 +37,7 @@ router.get("/sex", async function (req, res) {
     failure(res, error);
   }
 });
-
+ 
 /**
  * 统计每个月用户数量
  */
